@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		356421C12921F361008F5ED6 /* CreateCacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C02921F361008F5ED6 /* CreateCacheViewController.swift */; };
+		356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C22921F379008F5ED6 /* CacheViewController.swift */; };
 		B40F10C1291F66F200C541AA /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F10BC291F66F200C541AA /* QRViewController.swift */; };
 		B40F10C2291F66F200C541AA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F10BD291F66F200C541AA /* LoginViewController.swift */; };
 		B40F10C3291F66F200C541AA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F10BE291F66F200C541AA /* SignUpViewController.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		356421C02921F361008F5ED6 /* CreateCacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCacheViewController.swift; sourceTree = "<group>"; };
+		356421C22921F379008F5ED6 /* CacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheViewController.swift; sourceTree = "<group>"; };
 		B40F10BC291F66F200C541AA /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		B40F10BD291F66F200C541AA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B40F10BE291F66F200C541AA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				B40F10C6291F66F900C541AA /* Main.storyboard */,
+				356421C22921F379008F5ED6 /* CacheViewController.swift */,
+				356421C02921F361008F5ED6 /* CreateCacheViewController.swift */,
 				B40F10BD291F66F200C541AA /* LoginViewController.swift */,
 				B40F10C0291F66F200C541AA /* MapViewController.swift */,
 				B40F10BC291F66F200C541AA /* QRViewController.swift */,
@@ -171,9 +177,11 @@
 				B40F10C3291F66F200C541AA /* SignUpViewController.swift in Sources */,
 				B499A330291F370400FC2E5A /* Group_Project.xcdatamodeld in Sources */,
 				B499A326291F370400FC2E5A /* AppDelegate.swift in Sources */,
+				356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */,
 				B499A328291F370400FC2E5A /* SceneDelegate.swift in Sources */,
 				B40F10C4291F66F200C541AA /* ViewController.swift in Sources */,
 				B40F10C2291F66F200C541AA /* LoginViewController.swift in Sources */,
+				356421C12921F361008F5ED6 /* CreateCacheViewController.swift in Sources */,
 				B40F10C1291F66F200C541AA /* QRViewController.swift in Sources */,
 				B40F10C5291F66F200C541AA /* MapViewController.swift in Sources */,
 			);

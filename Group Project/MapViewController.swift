@@ -8,12 +8,18 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseCore
+
+var coordArray: [MKPointAnnotation] = []
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
 
     @IBOutlet var mapView: MKMapView!
     let locationManager = CLLocationManager()
     
+    /*
+    var ref: DatabaseReference!
+    ref = Database.database().reference()*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +38,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        /*
+        for id in coordArray{
+            ref.child(id).observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? [String: Any]
+                let lati = value?["latitude"] as? Double ?? 0
+                let longi = value?["longitude"] as ? Double ?? 0
+                let pinTitle = value?["title"] as ? String ?? ""
+                
+            })
+            // Access Firebase database
+            let pinMarker = MKPointAnnotation()
+            pinMarker.title = pinTitle
+            pinMarker.coordinate = CLLocationCoordinate2D(latitude: lati, longitude: longi)
+            mapView.addAnnotation(pinMarker)
+        }*/
         
-        // Access Firebase database
+        /*// Access Firebase database
         let test1 = MKPointAnnotation()
         test1.coordinate = CLLocationCoordinate2D(latitude: 38.897, longitude: -77.0369)
         let test2 = MKPointAnnotation()
@@ -44,7 +65,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         for annotation in annoList{
             print(annotation)
             mapView.addAnnotation(annotation)
-        }
+        }*/
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -54,8 +75,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "locationSegueIdentifier"{
+        if segue.identifier == "locationSegueIdentifier",
             //... ADD SEGUE CODE
+           let nextCacheVC = segue.destination as? CacheViewController{
+            
+            //nextCacheVC.titleName = (sender as! MKPointAnnotation).annotation!.title
+            nextCacheVC.titleName = (sender as! MKPointAnnotation).title!
+        }
+        
+        if segue.identifier == "createCacheSegueIdentifier"{
+            // segue code to send the position of the person
         }
     }
     
@@ -68,7 +97,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.setRegion(region, animated: true)
     }
     
-    @IBAction func addPoint(_ sender: Any) {
+    /*@IBAction func addPoint(_ sender: Any) {
         let controller = UIAlertController (
             title: "Establish A Point",
             message: "Would you like to leave a Code?",
@@ -79,7 +108,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             style: .default,
             handler: { action in
                 // add in way to get the current location
-                //testArray.append(locations[0])
+                testArray.append(locations[0])
             }
         ))
         
@@ -88,5 +117,5 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             style: .cancel
         ))
         present(controller, animated: true)
-    }
+    }*/
 }
