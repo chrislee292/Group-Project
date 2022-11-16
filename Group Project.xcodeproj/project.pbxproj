@@ -23,6 +23,7 @@
 		B499A33D291F398900FC2E5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B499A33C291F398800FC2E5A /* GoogleService-Info.plist */; };
 		B499A340291F3B3400FC2E5A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B499A33F291F3B3400FC2E5A /* FirebaseAuth */; };
 		B499A342291F3B3400FC2E5A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B499A341291F3B3400FC2E5A /* FirebaseFirestoreSwift */; };
+		B4AE0D1D29248EFD005791FF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		B499A334291F370500FC2E5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B499A336291F370500FC2E5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B499A33C291F398800FC2E5A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				B40F10C6291F66F900C541AA /* Main.storyboard */,
+				B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */,
 				356421C22921F379008F5ED6 /* CacheViewController.swift */,
 				356421C02921F361008F5ED6 /* CreateCacheViewController.swift */,
 				B40F10BD291F66F200C541AA /* LoginViewController.swift */,
@@ -180,6 +183,7 @@
 				356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */,
 				B499A328291F370400FC2E5A /* SceneDelegate.swift in Sources */,
 				B40F10C4291F66F200C541AA /* ViewController.swift in Sources */,
+				B4AE0D1D29248EFD005791FF /* ProfileViewController.swift in Sources */,
 				B40F10C2291F66F200C541AA /* LoginViewController.swift in Sources */,
 				356421C12921F361008F5ED6 /* CreateCacheViewController.swift in Sources */,
 				B40F10C1291F66F200C541AA /* QRViewController.swift in Sources */,
