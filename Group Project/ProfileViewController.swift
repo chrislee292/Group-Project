@@ -26,10 +26,10 @@ class ProfileViewController: UIViewController {
                 let data = document.data()
                 let firstName = data!["firstName"]! as? String ?? ""
                 let lastName = data!["lastName"]! as? String ?? ""
-                let amountOfFinds = data!["amountOfFinds"]! as? String ?? ""
+                let amountOfFinds = data!["amountOfFinds"]! as? Int ?? 0
                 print(amountOfFinds)
                 self.nameLabel.text! = "\(firstName) \(lastName)"
-                self.findAmountLabel.text! = "\(amountOfFinds)"
+                self.findAmountLabel.text! = "\(amountOfFinds) Finds"
             } else {
                 print("Document does not exist")
             }
