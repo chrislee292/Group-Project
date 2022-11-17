@@ -141,7 +141,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xDN-v4-J2J">
-                                <rect key="frame" x="-2" y="729" width="390" height="44"/>
+                                <rect key="frame" x="-2" y="728" width="389" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="person" catalog="system" width="231.66667175292969" id="zJR-f9-ZJd">
@@ -238,6 +238,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycK-56-HRx">
+                                <rect key="frame" x="16" y="391" width="0.0" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iXZ-7Y-CYx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -256,12 +263,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="findAmountLabel" destination="ycK-56-HRx" id="HND-8n-iO6"/>
                         <outlet property="nameLabel" destination="zS0-rR-Cql" id="2W8-0h-eG2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qf5-Re-u1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1783" y="768"/>
+            <point key="canvasLocation" x="1781.5384615384614" y="767.7725118483412"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="ZPA-Vw-EvF">
@@ -567,7 +575,8 @@
                         <outlet property="firstNameField" destination="9qb-Dx-1q1" id="CG5-AQ-nA8"/>
                         <outlet property="lastNameField" destination="ouH-Lh-1jq" id="ZVb-c3-gkv"/>
                         <outlet property="passwordField" destination="UYm-aC-Lad" id="JiS-ig-yB5"/>
-                        <outlet property="usernameField" destination="BPj-mO-nIu" id="zz9-qT-EFs"/>
+                        <outlet property="phoneNumberField" destination="BPj-mO-nIu" id="seb-0o-31d"/>
+                        <outlet property="usernameField" destination="7kb-ED-w82" id="G5P-9b-la3"/>
                         <segue destination="Npu-69-ach" kind="presentation" identifier="SignUpToNavControl" modalPresentationStyle="fullScreen" id="MUW-FF-Vtg"/>
                     </connections>
                 </viewController>

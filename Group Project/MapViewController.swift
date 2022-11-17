@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import FirebaseCore
+import FirebaseAuth
 
 var coordArray: [MKPointAnnotation] = []
 

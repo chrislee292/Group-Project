@@ -11,54 +11,29 @@ import Firebase
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var findAmountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let userEmail = Auth.auth().currentUser?.email
         let db = Firestore.firestore()
-//        db.collection("userInfo").getDocuments() { (QuerySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                for document in QuerySnapshot!.documents {
-//                    print("\(document.documentID) => \(document.data())")
-//                }
-//            }
-//
-//        }
-//
-//        Firestore.firestore().collection("userInfo").doc("1").update({
-//          [nameLabel]: 'text'
-//        })
-        let docRef = db.collection("userInfo").document("1")
+        let docRef = db.collection("userInfo").document(userEmail!)
 
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 print("Document data: \(dataDescription)")
-                
                 let data = document.data()
-                let username = data!["userName"]! as? String ?? ""
-                self.nameLabel.text! = username
-                print(username)
+                let firstName = data!["firstName"]! as? String ?? ""
+                let lastName = data!["lastName"]! as? String ?? ""
+                let amountOfFinds = data!["amountOfFinds"]! as? String ?? ""
+                print(amountOfFinds)
+                self.nameLabel.text! = "\(firstName) \(lastName)"
+                self.findAmountLabel.text! = "\(amountOfFinds)"
             } else {
                 print("Document does not exist")
             }
-            
         }
-        
-   
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
