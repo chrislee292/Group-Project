@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090659742926FAC9002F5828 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090659732926FAC9002F5828 /* SettingsViewController.swift */; };
 		356421C12921F361008F5ED6 /* CreateCacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C02921F361008F5ED6 /* CreateCacheViewController.swift */; };
 		356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C22921F379008F5ED6 /* CacheViewController.swift */; };
 		B40F10C1291F66F200C541AA /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F10BC291F66F200C541AA /* QRViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		090659732926FAC9002F5828 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		356421C02921F361008F5ED6 /* CreateCacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCacheViewController.swift; sourceTree = "<group>"; };
 		356421C22921F379008F5ED6 /* CacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheViewController.swift; sourceTree = "<group>"; };
 		B40F10BC291F66F200C541AA /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				B40F10C6291F66F900C541AA /* Main.storyboard */,
+				090659732926FAC9002F5828 /* SettingsViewController.swift */,
 				B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */,
 				356421C22921F379008F5ED6 /* CacheViewController.swift */,
 				356421C02921F361008F5ED6 /* CreateCacheViewController.swift */,
@@ -188,6 +191,7 @@
 				356421C12921F361008F5ED6 /* CreateCacheViewController.swift in Sources */,
 				B40F10C1291F66F200C541AA /* QRViewController.swift in Sources */,
 				B40F10C5291F66F200C541AA /* MapViewController.swift in Sources */,
+				090659742926FAC9002F5828 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
