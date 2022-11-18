@@ -7,6 +7,7 @@
 
 //import FirebaseDatabase
 import UIKit
+import Firebase
 
 class CacheViewController: UIViewController {
 
@@ -14,19 +15,23 @@ class CacheViewController: UIViewController {
 
     ref = Database.database().reference()
     */
+    
+    let db = Firestore.firestore()
+    
     var titleName:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        /*
-        ref.child("cache_\(titleName)").observeSingleEvent(of: .value, with: { snapshot in
-            guard let value = snapshot.value as? [String: Any] else{
-                return
-            }
-            print(\(value))
-        })*/
         
+        let docRef = db.collection("caches").document("cache_\(titleName)")
+        // grabs whats in the document of the specific annotation
+        docRef.getDocument{(document, error) in
+            if let document = document, document.exists{
+                let dataDescription = document.data().map(String.init(describing: )) ?? "nil"
+                print("Document data: \(dataDescription)")
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
 }

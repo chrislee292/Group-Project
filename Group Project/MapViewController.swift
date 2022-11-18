@@ -10,10 +10,15 @@ import MapKit
 import CoreLocation
 import FirebaseCore
 import FirebaseAuth
+import Firebase
+
+protocol NotifDistance{
+    func tellDistance(notif:Bool)
+}
 
 var coordArray: [MKPointAnnotation] = []
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, NotifDistance{
 
     @IBOutlet var mapView: MKMapView!
     let locationManager = CLLocationManager()
@@ -22,8 +27,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var ref: DatabaseReference!
     ref = Database.database().reference()*/
     
+    let db = Firestore.firestore()
+    var localLong:Double = 0.0
+    var localLat:Double = 0.0
+    
+    var localPos = CLLocation(latitude: 0.0, longitude: 0.0)
+    var templocalPos = CLLocation(latitude: 0.0, longitude: 0.0)
+    
+    var distTrav:Double = 0.0
+    
+    var notifBool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //let db = Firestore.firestore()
 
         locationManager.requestAlwaysAuthorization()
         
@@ -39,21 +57,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        /*
-        for id in coordArray{
-            ref.child(id).observeSingleEvent(of: .value, with: { snapshot in
-                let value = snapshot.value as? [String: Any]
-                let lati = value?["latitude"] as? Double ?? 0
-                let longi = value?["longitude"] as ? Double ?? 0
-                let pinTitle = value?["title"] as ? String ?? ""
-                
-            })
-            // Access Firebase database
-            let pinMarker = MKPointAnnotation()
-            pinMarker.title = pinTitle
-            pinMarker.coordinate = CLLocationCoordinate2D(latitude: lati, longitude: longi)
-            mapView.addAnnotation(pinMarker)
-        }*/
+        
+        let cacheRef = db.collection("caches")
+        
+        cacheRef.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting document: \(err)")
+            } else {
+                for document in querySnapshot!.documents{
+                    let data = document.data()
+                    let lati = data["latitude"]! as? Double ?? 0
+                    let longi = data["longitude"]! as? Double ?? 0
+                    let pinTitle = data["title"]! as? String ?? "nil"
+                    
+                    let pinMarker = MKPointAnnotation()
+                    pinMarker.title = pinTitle
+                    pinMarker.coordinate = CLLocationCoordinate2D(latitude: lati, longitude: longi)
+                    self.mapView.addAnnotation(pinMarker)
+                }
+            }
+        }
         
         /*// Access Firebase database
         let test1 = MKPointAnnotation()
@@ -94,29 +117,62 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let long = userLocation.coordinate.longitude
         let lat = userLocation.coordinate.latitude
         
+        localLat = lat
+        localLong = long
+        
+        localPos = CLLocation(latitude: lat, longitude: long)
+        //localPos.coordinate.longitude = long
+        
+        if distTrav < 10{
+            let userLocationMapPoint = userLocation
+            let lastUserLocationMapPoint = locations[locations.endIndex-1]
+                
+            distTrav += userLocationMapPoint.distance(from: lastUserLocationMapPoint)
+        }else{
+            tellDistance(notif: notifBool)
+            distTrav = 0
+        }
+        
         let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(region, animated: true)
     }
     
-    /*@IBAction func addPoint(_ sender: Any) {
-        let controller = UIAlertController (
-            title: "Establish A Point",
-            message: "Would you like to leave a Code?",
-            preferredStyle: .alert)
+    
+    
+    // notification method
+    func tellDistance(notif: Bool) {
         
-        controller.addAction(UIAlertAction(
-            title: "Confirm",
-            style: .default,
-            handler: { action in
-                // add in way to get the current location
-                testArray.append(locations[0])
+        // get this to cycle at certain time frame-10 min? or at certain distance?
+        
+        if notif == true{
+            var anno = mapView.annotations
+            
+            var radNear:Double = 50.0
+            for point in anno{
+                let distanceInMeters = localPos.distance(from: point as! CLLocation)
+                
+                if distanceInMeters <= radNear{
+                    // create notification content
+                    let content = UNMutableNotificationContent()
+                    // create the title, subtitle, and body of the notification
+                    content.title = "A cache is near!"
+                    content.subtitle = "A cache has been detected near your position."
+                    content.body = "It is \(distanceInMeters) meters away."
+                    
+                    // time to wait for notification
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+                    
+                    // create a request for a notification
+                    let request = UNNotificationRequest(identifier: "myNotification", content: content, trigger: trigger)
+                    
+                    // add the request to the center
+                    UNUserNotificationCenter.current().add(request)
+                }
             }
-        ))
-        
-        controller.addAction(UIAlertAction(
-            title: "Confirm",
-            style: .cancel
-        ))
-        present(controller, animated: true)
-    }*/
+        }
+    }
+    
+    @IBAction func addPoint(_ sender: Any) {
+        performSegue(withIdentifier: "createCacheSegueIdentifier", sender: view)
+    }
 }
