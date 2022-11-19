@@ -7,14 +7,17 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var findAmountLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var profilePhoto: UIImageView!
     
     let segueIdentifier = "ProfileToEditProfile"
+    let userEmail = Auth.auth().currentUser?.email
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,8 @@ class ProfileViewController: UIViewController {
         let userEmail = Auth.auth().currentUser?.email
         let db = Firestore.firestore()
         let docRef = db.collection("userInfo").document(userEmail!)
+        let storage = Storage.storage()
+        var profilePhotoReference: StorageReference!
 
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -45,6 +50,23 @@ class ProfileViewController: UIViewController {
                 self.usernameLabel.text! = "\(username)"
             } else {
                 print("Document does not exist")
+            }
+        }
+    
+        Firestore.firestore().collection("userInfo").document(userEmail!).getDocument { snapshot, error in
+            if error != nil {
+                print ("Error")
+                return
+            } else {
+                let profilePhotoURL = snapshot?.get("profilePhotoLink")
+                print("profilePhotoURL = \(profilePhotoURL!)")
+                profilePhotoReference = storage.reference(forURL: profilePhotoURL as! String)
+                profilePhotoReference.downloadURL { (url, error) in
+                    let data = NSData(contentsOf: url!)
+                    let image = UIImage(data: data! as Data)
+                    self.profilePhoto.contentMode = .scaleAspectFit
+                    self.profilePhoto.image = image
+                }
             }
         }
     }

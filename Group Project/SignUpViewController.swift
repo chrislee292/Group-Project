@@ -56,7 +56,8 @@ class SignUpViewController: UIViewController {
             "firstName": firstNameField.text!,
             "lastName": lastNameField.text!,
             "password": passwordField.text!,
-            "amountOfFinds": 0
+            "amountOfFinds": 0,
+            "profilePhotoLink": ""
         ]) { err in
         if let err = err {
             print("Error writing document: \(err)")
