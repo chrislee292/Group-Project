@@ -12,9 +12,6 @@ class SettingsViewController: UIViewController {
     @IBAction func notifToggle(_ sender: Any) {
         //var notifTog = false
     }
-    
-    @IBAction func darkModeToggle(_ sender: Any) {
-    }
 
     @IBAction func segmentControlFont(_ sender: Any) {
     }
@@ -24,7 +21,6 @@ class SettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //if segue.identifier == "GPSSegueIdentifier",
             //... ADD SEGUE CODE
