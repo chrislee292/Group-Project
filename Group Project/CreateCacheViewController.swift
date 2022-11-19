@@ -15,21 +15,21 @@ class CreateCacheViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cacheRef = db.collection("caches")
+        //let cacheRef = db.collection("caches")
         
         // Do any additional setup after loading the view.
     }
     
     @IBAction func cacheButtonPressed(_ sender: Any) {
         
-        cacheRef.document("cache_\(titleLabel)").setData([
-            "title": titleLabel,
-            "latitude": latLabel,
-            "longitude": longLabel,
-            "difficulty": diffLabel,
-            "hazards": hazardLabel,
-            "hints": hintLabel
-        ])
+//        cacheRef.document("cache_\(titleLabel)").setData([
+//            "title": titleLabel,
+//            "latitude": latLabel,
+//            "longitude": longLabel,
+//            "difficulty": diffLabel,
+//            "hazards": hazardLabel,
+//            "hints": hintLabel
+//       ])
         
         /*let object: [String:Any] = [
             "title": titleLabel,

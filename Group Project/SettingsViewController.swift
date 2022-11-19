@@ -10,7 +10,7 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     @IBAction func notifToggle(_ sender: Any) {
-        var notifTog = false
+        //var notifTog = false
     }
     
     @IBAction func darkModeToggle(_ sender: Any) {
@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController {
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GPSSegueIdentifier",
+        //if segue.identifier == "GPSSegueIdentifier",
             //... ADD SEGUE CODE
            //let nextCacheVC = segue.destination as? GPSViewController{
             // add delegate to send notification to GPS screen
