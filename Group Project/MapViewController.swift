@@ -23,25 +23,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet var mapView: MKMapView!
     let locationManager = CLLocationManager()
     
-    /*
-    var ref: DatabaseReference!
-    ref = Database.database().reference()*/
-    
     let db = Firestore.firestore()
     var localLong:Double = 0.0
     var localLat:Double = 0.0
     
     var localPos = CLLocation(latitude: 0.0, longitude: 0.0)
-    var templocalPos = CLLocation(latitude: 0.0, longitude: 0.0)
+    var templocalPos = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     
     var distTrav:Double = 0.0
     
-    var notifBool = false
+    var notifBool = true
+    
+    let timerQueue = DispatchQueue(label: "timeQueue", qos: .background)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let db = Firestore.firestore()
+        // ask the user to allow local notifications
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) {
+            granted, error in
+            if granted{
+                print("good")
+            } else if let error = error{
+                print(error.localizedDescription)
+            }
+        }
 
         locationManager.requestAlwaysAuthorization()
         
@@ -53,6 +59,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsUserLocation = true
         
         // Do any additional setup after loading the view.
+        
+        if notifBool == true{
+            timerQueue.async {
+                while self.notifBool == true{
+                    //sleep(300)
+                    sleep(5)
+                    
+                    DispatchQueue.main.async {
+                        self.tellDistance(notif: self.notifBool)
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,19 +96,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
             }
         }
-        
-        /*// Access Firebase database
-        let test1 = MKPointAnnotation()
-        test1.coordinate = CLLocationCoordinate2D(latitude: 38.897, longitude: -77.0369)
-        let test2 = MKPointAnnotation()
-        test2.coordinate = CLLocationCoordinate2D(latitude: 2, longitude: 2)
-        
-        let annoList: [MKPointAnnotation] = [test1, test2]
-        
-        for annotation in annoList{
-            print(annotation)
-            mapView.addAnnotation(annotation)
-        }*/
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -121,54 +127,51 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         localLong = long
         
         localPos = CLLocation(latitude: lat, longitude: long)
-        //localPos.coordinate.longitude = long
-        
-        if distTrav < 10{
-            let userLocationMapPoint = userLocation
-            let lastUserLocationMapPoint = locations[locations.endIndex-1]
-                
-            distTrav += userLocationMapPoint.distance(from: lastUserLocationMapPoint)
-        }else{
-            tellDistance(notif: notifBool)
-            distTrav = 0
-        }
+        templocalPos = userLocation.coordinate
         
         let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(region, animated: true)
     }
     
-    
-    
     // notification method
     func tellDistance(notif: Bool) {
-        
-        // get this to cycle at certain time frame-10 min? or at certain distance?
+        print("hello")
         
         if notif == true{
-            var anno = mapView.annotations
+            let anno = mapView.annotations
             
-            var radNear:Double = 50.0
+            var cacheCounter = 0
+            var skipFirst = 0
+            
+            let radNear:Double = 50.0
             for point in anno{
-                let distanceInMeters = localPos.distance(from: point as! CLLocation)
-                
-                if distanceInMeters <= radNear{
-                    // create notification content
-                    let content = UNMutableNotificationContent()
-                    // create the title, subtitle, and body of the notification
-                    content.title = "A cache is near!"
-                    content.subtitle = "A cache has been detected near your position."
-                    content.body = "It is \(distanceInMeters) meters away."
-                    
-                    // time to wait for notification
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-                    
-                    // create a request for a notification
-                    let request = UNNotificationRequest(identifier: "myNotification", content: content, trigger: trigger)
-                    
-                    // add the request to the center
-                    UNUserNotificationCenter.current().add(request)
+                if skipFirst != 0{
+                    print("\(point.coordinate.latitude),\(point.coordinate.longitude)")
+                    let distanceInMeters = localPos.distance(from: CLLocation(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude))
+                    print(distanceInMeters)
+                    if distanceInMeters <= radNear {
+                        print(distanceInMeters <= radNear)
+                        cacheCounter += 1
+                    }
                 }
+                skipFirst += 1
             }
+            
+            // create notification content
+            let content = UNMutableNotificationContent()
+            // create the title, subtitle, and body of the notification
+            content.title = "Cache Notification!"
+            content.subtitle = "We have checked for caches near your location"
+            content.body = "There are \(cacheCounter) caches near your position."
+            
+            // time to wait for notification
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false)
+            
+            // create a request for a notification
+            let request = UNNotificationRequest(identifier: "myNotification", content: content, trigger: trigger)
+            
+            // add the request to the center
+            UNUserNotificationCenter.current().add(request)
         }
     }
     

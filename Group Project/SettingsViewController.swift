@@ -24,10 +24,12 @@ class SettingsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //if segue.identifier == "GPSSegueIdentifier",
             //... ADD SEGUE CODE
-           //let nextCacheVC = segue.destination as? GPSViewController{
-            // add delegate to send notification to GPS screen
+            //let nextCacheVC = segue.destination as? MapViewController{
+                //nextCacheVC.notifBool = notifTog
+            //add delegate to send notification to GPS screen
             // or just send variable???
-        }
+        //}
+    }
     
     @IBAction func logOutButton(_ sender: Any) {
     }
