@@ -6,24 +6,88 @@
 //
 
 import UIKit
+import AVFoundation
 
-class QRViewController: UIViewController {
 
+class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    
+    var capture = AVCaptureSession()
+    var vid = AVCaptureVideoPreviewLayer()
+    var qrcodeinview: UIView?
+    var result:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        //making session
+        if UIImagePickerController.availableCaptureModes(for: .rear) != nil{
+            
+            guard let capDev = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else{
+                print("Failed to open Camera")
+                return
+            }
+            
+            do{
+                let input = try AVCaptureDeviceInput(device: capDev)
+                capture.addInput(input)
+                
+                let captureMetaDataOutput = AVCaptureMetadataOutput()
+                capture.addOutput(captureMetaDataOutput)
+                
+                captureMetaDataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+                captureMetaDataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+                
+                vid = AVCaptureVideoPreviewLayer(session: capture)
+                vid.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                vid.frame = view.layer.bounds
+                view.layer.addSublayer(vid)
+                
+                capture.startRunning()
+                
+                //QR Code Frame for QR code
+                
+                qrcodeinview = UIView()
+                
+                if let qrcodeinview = qrcodeinview{
+                    qrcodeinview.layer.borderColor = UIColor.gray.cgColor
+                    qrcodeinview.layer.borderWidth = 3
+                    view.addSubview(qrcodeinview)
+                    view.bringSubviewToFront(qrcodeinview)
+                }
+            } catch {
+                print(error)
+                return
+            }
+        }
+        else{
+            let alertVC = UIAlertController(
+                title: "No camera",
+                message: "Sorry, this device has no rear camera",
+                preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "OK",
+                style: .default)
+            alertVC.addAction(okAction)
+            present(alertVC,animated:true)
+        }
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        if metadataObjects.count == 0{
+            qrcodeinview?.frame = CGRect.zero
+            result = "No QR code found"
+            return
+        }
+        let obj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        if obj.type == AVMetadataObject.ObjectType.qr {
+            let bcobj = vid.transformedMetadataObject(for: obj)
+            qrcodeinview?.frame = bcobj!.bounds
+            
+            if obj.stringValue != nil{
+                result = obj.stringValue ?? ""
+            }
+        }
+        
     }
-    */
 
 }
