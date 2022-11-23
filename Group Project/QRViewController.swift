@@ -21,6 +21,22 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
         //making session
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil{
             
+            switch AVCaptureDevice.authorizationStatus(for: .video) {
+            case .notDetermined:
+                // we don't know
+                AVCaptureDevice.requestAccess(for: .video) {
+                    accessGranted in
+                    guard accessGranted == true else { return }
+                }
+            case .authorized:
+                // we have permission already
+                break
+            default:
+                // we know we don't have access
+                print("Access denied")
+                return
+            }
+            
             guard let capDev = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else{
                 print("Failed to open Camera")
                 return
