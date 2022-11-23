@@ -10,6 +10,7 @@
 		090659742926FAC9002F5828 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090659732926FAC9002F5828 /* SettingsViewController.swift */; };
 		356421C12921F361008F5ED6 /* CreateCacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C02921F361008F5ED6 /* CreateCacheViewController.swift */; };
 		356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C22921F379008F5ED6 /* CacheViewController.swift */; };
+		35F1A0DC292E27C600E2C88F /* QRGenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F1A0DB292E27C600E2C88F /* QRGenViewController.swift */; };
 		B40649B72928BF47002EBA6D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B40649B62928BF47002EBA6D /* FirebaseStorage */; };
 		B40F10C1291F66F200C541AA /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F10BC291F66F200C541AA /* QRViewController.swift */; };
 		B40F10C2291F66F200C541AA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40F10BD291F66F200C541AA /* LoginViewController.swift */; };
@@ -33,6 +34,7 @@
 		090659732926FAC9002F5828 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		356421C02921F361008F5ED6 /* CreateCacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCacheViewController.swift; sourceTree = "<group>"; };
 		356421C22921F379008F5ED6 /* CacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheViewController.swift; sourceTree = "<group>"; };
+		35F1A0DB292E27C600E2C88F /* QRGenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGenViewController.swift; sourceTree = "<group>"; };
 		B40F10BC291F66F200C541AA /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		B40F10BD291F66F200C541AA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B40F10BE291F66F200C541AA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				B40F10C6291F66F900C541AA /* Main.storyboard */,
+				35F1A0DB292E27C600E2C88F /* QRGenViewController.swift */,
 				B4995EFB292883F80036CFCC /* EditProfileViewController.swift */,
 				090659732926FAC9002F5828 /* SettingsViewController.swift */,
 				B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */,
@@ -196,6 +199,7 @@
 			files = (
 				B4995EFC292883F80036CFCC /* EditProfileViewController.swift in Sources */,
 				B40F10C3291F66F200C541AA /* SignUpViewController.swift in Sources */,
+				35F1A0DC292E27C600E2C88F /* QRGenViewController.swift in Sources */,
 				B499A330291F370400FC2E5A /* Group_Project.xcdatamodeld in Sources */,
 				B499A326291F370400FC2E5A /* AppDelegate.swift in Sources */,
 				356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */,

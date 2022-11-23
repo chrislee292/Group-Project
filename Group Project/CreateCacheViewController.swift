@@ -108,23 +108,5 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate {
             present(controller, animated: true)
             performSegue(withIdentifier: "return", sender: (Any).self)
         }
-        
-        /*let docRef = db.collection("caches").document("cache_\(titleLabel.text ?? "")")
-         // grabs whats in the document of the specific annotation
-         docRef.getDocument { (document, error) in
-             if let document = document, document.exists {
-                 
-             }*/
-
-        /*let object: [String:Any] = [
-            "title": titleLabel,
-            "latitude": latLabel,
-            "longitude": longLabel,
-            "difficulty": diffLabel,
-            "hazards": hazardLabel,
-            "hints": hintLabel
-        ]
-        database.child("cache_\(titleLabel)").setValue(object)
-        //database.child("cache_\(Int(latLabel))\(Int(longLabel))").setValue(object)*/
     }
 }

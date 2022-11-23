@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Firebase
 
 
 class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
@@ -15,6 +16,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
     var vid = AVCaptureVideoPreviewLayer()
     var qrcodeinview: UIView?
     var result:String = ""
+    var userEmail = Auth.auth().currentUser?.email
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +106,33 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
             }
         }
         
+        if result != userEmail && result != "No QR code found"
+        {
+            let finds = 0
+            let db = Firestore.firestore()
+            let docRef = db.collection("userInfo").document(userEmail!)
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    let data = document.data()
+                    let amountOfFinds = data!["amountOfFinds"]! as? Int ?? 0
+                    let finds = amountOfFinds
+                }
+            }
+            db.collection("userInfo").document(userEmail!).setData([ "amountOfFinds": finds+1 ], merge: true)
+        }
+        else{
+            let controller = UIAlertController(
+                title: "Invalid Cache",
+                message: "You are the owner of this cache",
+                preferredStyle: .alert)
+            
+            controller.addAction(UIAlertAction(
+                title: "OK",
+                style: .default))
+                    
+            present(controller, animated: true)
+        }
     }
-
 }
