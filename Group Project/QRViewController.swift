@@ -9,7 +9,6 @@ import UIKit
 import AVFoundation
 import Firebase
 
-
 class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     var capture = AVCaptureSession()
@@ -108,7 +107,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
         
         if result != userEmail && result != "No QR code found"
         {
-            let finds = 0
+            var finds = 0
             let db = Firestore.firestore()
             let docRef = db.collection("userInfo").document(userEmail!)
             docRef.getDocument { (document, error) in
@@ -117,7 +116,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                     print("Document data: \(dataDescription)")
                     let data = document.data()
                     let amountOfFinds = data!["amountOfFinds"]! as? Int ?? 0
-                    let finds = amountOfFinds
+                    finds = amountOfFinds
                 }
             }
             db.collection("userInfo").document(userEmail!).setData([ "amountOfFinds": finds+1 ], merge: true)

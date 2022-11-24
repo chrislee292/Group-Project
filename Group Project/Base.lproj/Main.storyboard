@@ -202,7 +202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNB-lg-bpe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3975" y="-815"/>
+            <point key="canvasLocation" x="4571" y="-838"/>
         </scene>
         <!--GPS-->
         <scene sceneID="vNj-ah-uKU">
@@ -212,15 +212,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6X-JM-gUy">
-                                <rect key="frame" x="16" y="91" width="98" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xDN-v4-J2J">
-                                <rect key="frame" x="-6" y="721" width="387" height="47"/>
+                                <rect key="frame" x="-7" y="721" width="387" height="46"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="person" catalog="system" width="231.66667175292969" id="zJR-f9-ZJd">
@@ -269,7 +262,7 @@
                         <rightBarButtonItems>
                             <barButtonItem image="camera" catalog="system" id="W7U-SQ-Umq">
                                 <connections>
-                                    <segue destination="dPI-hA-RDi" kind="show" id="8eb-Mr-izo"/>
+                                    <segue destination="dPI-hA-RDi" kind="show" id="hoZ-0F-Tby"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="plus" catalog="system" id="9qo-Qv-Rhi">
@@ -365,7 +358,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qf5-Re-u1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2384.6153846153848" y="787.67772511848341"/>
+            <point key="canvasLocation" x="3642" y="847"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="ZPA-Vw-EvF">
@@ -532,7 +525,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ENd-5F-fTk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="BDH-Wa-M2d" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3063" y="788"/>
+            <point key="canvasLocation" x="4571" y="848"/>
         </scene>
         <!--Gen View Controller-->
         <scene sceneID="lvw-9A-L4z">
@@ -566,7 +559,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zp-dX-tPS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3024.6153846153843" y="-752.1327014218009"/>
+            <point key="canvasLocation" x="3515" y="-838"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="h9x-Tv-ihI">
@@ -719,6 +712,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qfm-hs-hvX">
+                                <rect key="frame" x="136" y="726" width="127" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete Cache"/>
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="IUe-C0-krp" eventType="touchUpInside" id="FrT-q9-otR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fNY-ca-AHF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -728,7 +730,6 @@
                         <outlet property="Diff" destination="FaU-PW-yu3" id="p3x-rR-flX"/>
                         <outlet property="Hazards" destination="I3x-zs-LZS" id="KSA-AA-q9e"/>
                         <outlet property="Hint" destination="NtX-jI-mXl" id="eab-nP-59E"/>
-                        <outlet property="Title" destination="Rq6-YB-hUh" id="czp-3R-Age"/>
                         <outlet property="name" destination="Rq6-YB-hUh" id="WN7-TJ-hK8"/>
                     </connections>
                 </viewController>
@@ -743,18 +744,6 @@
                     <view key="view" contentMode="scaleToFill" id="Cts-1M-OQh">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TmV-dz-PML">
-                                <rect key="frame" x="158" y="726" width="75" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-a1-Wvd">
-                                <rect key="frame" x="75" y="254" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="nIK-Sg-wbt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -762,7 +751,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7KA-hb-r90" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6011" y="-815"/>
+            <point key="canvasLocation" x="6480" y="-818"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rAs-Df-cEL">

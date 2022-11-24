@@ -16,8 +16,10 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var hintLabel: UITextField!
     @IBOutlet weak var diffLabel: UISegmentedControl!
     var diff:Int = 1
-    var lat:String = ""
-    var long:String = ""
+    var lat:Double = 0.0
+    var long:Double = 0.0
+    var currentPos = CLLocation(latitude: 0.0, longitude: 0.0)
+    
     @IBAction func diffLabelchanged(_ sender: Any) {
         switch diffLabel.selectedSegmentIndex {
         case 0:
@@ -55,10 +57,11 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate {
     {
         let latestLocation:CLLocation = locations[locations.count - 1]
         
-        lat = String(format: "%.4f",
-                               latestLocation.coordinate.latitude)
-        long = String(format: "%.4f",
-                                latestLocation.coordinate.longitude)
+        lat = Double(latestLocation.coordinate.latitude)
+        long = Double(latestLocation.coordinate.longitude)
+        
+        //lat = Double(String(format: "%.4f",latestLocation.coordinate.latitude))
+        //long = Double(String(format: "%.4f",latestLocation.coordinate.longitude))
     }
     
     @IBAction func cacheButtonPressed(_ sender: Any) {
@@ -101,12 +104,12 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate {
                 "difficulty": "\(diff)",
                 "hazards": hazardLabel.text ?? "",
                 "hints": hintLabel.text ?? "",
-                "email": Auth.auth().currentUser?.email as Any
-                   ])
+                "email": String((Auth.auth().currentUser?.email)!)
+                ])
             let controller = UIAlertController(title: "Cache Created", message: "\(titleLabel.text ?? "") has been created", preferredStyle: .alert)
             controller.addAction(UIAlertAction(title: "Ok", style: .default))
             present(controller, animated: true)
-            performSegue(withIdentifier: "return", sender: (Any).self)
+            //performSegue(withIdentifier: "return", sender: (Any).self)
         }
     }
 }

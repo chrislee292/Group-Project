@@ -56,7 +56,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
+        mapView.delegate = self
         mapView.showsUserLocation = true
+        mapView.showAnnotations(mapView.annotations, animated: true)
         
         // Do any additional setup after loading the view.
         
@@ -77,13 +79,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        print("View")
+        mapView.removeAnnotations(mapView.annotations)
+        
         let cacheRef = db.collection("caches")
+        var counter = 0
         
         cacheRef.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
                 for document in querySnapshot!.documents{
+                    
                     let data = document.data()
                     let lati = data["latitude"]! as? Double ?? 0
                     let longi = data["longitude"]! as? Double ?? 0
@@ -93,12 +100,43 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     pinMarker.title = pinTitle
                     pinMarker.coordinate = CLLocationCoordinate2D(latitude: lati, longitude: longi)
                     self.mapView.addAnnotation(pinMarker)
+                    counter += 1
                 }
             }
         }
     }
     
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if !(annotation is MKPointAnnotation){
+            return nil
+        }
+        
+        let reuseId = "pin"
+
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        if pinView == nil {
+            pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            //pinView!.pinColor = UIColor.red
+
+            //var rightButton: AnyObject! = UIButton(type: UIButton.ButtonType.detailDisclosure)
+            //rightButton.title(UIControl.State.Normal)
+            
+            let btn = UIButton(type: .detailDisclosure)
+
+            //pinView!.rightCalloutAccessoryView = rightButton as? UIView
+            pinView!.rightCalloutAccessoryView = btn
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+
+        return pinView
+    }
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print(view.annotation!.title!!)
         if control == view.rightCalloutAccessoryView{
             performSegue(withIdentifier: "locationSegueIdentifier", sender: view)
         }
@@ -108,13 +146,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if segue.identifier == "locationSegueIdentifier",
             //... ADD SEGUE CODE
            let nextCacheVC = segue.destination as? CacheViewController{
+            print("here")
             
-            //nextCacheVC.titleName = (sender as! MKPointAnnotation).annotation!.title
-            nextCacheVC.titleName = (sender as! MKPointAnnotation).title!
+            nextCacheVC.titleName = String((sender as! MKAnnotationView).annotation!.title!!)
+            //nextCacheVC.titleName = (sender as! MKPointAnnotation).title!
         }
         
-        if segue.identifier == "createCacheSegueIdentifier"{
-            // segue code to send the position of the person
+        if segue.identifier == "createCacheSegueIdentifier",
+        
+        let nextCacheVC = segue.destination as? CreateCacheViewController{
+            
+            nextCacheVC.currentPos = localPos
         }
     }
     
@@ -129,13 +171,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         localPos = CLLocation(latitude: lat, longitude: long)
         templocalPos = userLocation.coordinate
         
-        let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
-        mapView.setRegion(region, animated: true)
+        //let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+        //mapView.setRegion(region, animated: true)
     }
     
     // notification method
     func tellDistance(notif: Bool) {
-        print("hello")
+        //print("hello")
         
         if notif == true{
             let anno = mapView.annotations
@@ -146,11 +188,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let radNear:Double = 50.0
             for point in anno{
                 if skipFirst != 0{
-                    print("\(point.coordinate.latitude),\(point.coordinate.longitude)")
+                    //print("\(point.coordinate.latitude),\(point.coordinate.longitude)")
                     let distanceInMeters = localPos.distance(from: CLLocation(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude))
-                    print(distanceInMeters)
+                    //print(distanceInMeters)
                     if distanceInMeters <= radNear {
-                        print(distanceInMeters <= radNear)
+                        //print(distanceInMeters <= radNear)
                         cacheCounter += 1
                     }
                 }

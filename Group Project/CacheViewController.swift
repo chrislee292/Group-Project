@@ -12,11 +12,6 @@ import FirebaseCore
 import FirebaseStorage
 
 class CacheViewController: UIViewController {
-
-    //var ref: DatabaseReference!
-
-    //ref = Database.database().reference()
-    
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var Diff: UILabel!
@@ -24,6 +19,8 @@ class CacheViewController: UIViewController {
     @IBOutlet weak var Hint: UILabel!
     
     let db = Firestore.firestore()
+    
+    var creator:String = ""
     
     var titleName:String = ""
     
@@ -41,36 +38,41 @@ class CacheViewController: UIViewController {
                 self.Hazards.text = data!["hazards"]! as? String ?? ""
                 self.Hint.text = data!["hints"]! as? String ?? ""
                 self.name.text = data!["title"]! as? String ?? ""
+                self.creator = data!["email"]! as? String ?? ""
             } else {
                 print("Document does not exist")
             }
         }
     }
     
-    // add to button on View Controller
-    // also add the identifier for creator
-    func deleteCache(){
+    @IBAction func deleteButtonPressed(_ sender: Any) {
         let userEmail = Auth.auth().currentUser?.email
-        print(userEmail!)
-        var creator = ""
         
-        let docRef = db.collection("caches").document("cache_\(titleName)")
+        //let docRef = db.collection("caches").document("cache_\(titleName)")
         // grabs whats in the document of the specific annotation
-        docRef.getDocument{(document, error) in
+        /*docRef.getDocument{(document, error) in
             if let document = document, document.exists{
                 let dataDescription = document.data().map(String.init(describing: )) ?? "nil"
                 print("Document data: \(dataDescription)")
                 let data = document.data()
-                creator = data!["creator"]! as? String ?? ""
+                print("in loop")
+                creator = data!["email"]! as? String ?? ""
+                print(creator)
             } else {
                 print("Document does not exist")
             }
-        }
+        }*/
         
-        if userEmail == creator{
-            
+        
+        print(String(userEmail!) == String(creator))
+        
+        print("hello")
+        print(creator)
+        print(userEmail!)
+        
+        if userEmail! == creator{
             let controller = UIAlertController(
-                title: "Alert Controller",
+                title: "Delete this Cache?",
                 message: "Are you sure you want to delete this cache?",
                 preferredStyle: .alert)
             controller.addAction(UIAlertAction(
@@ -91,7 +93,7 @@ class CacheViewController: UIViewController {
             present(controller, animated: true)
         }else{
             let controller = UIAlertController(
-                title: "Alert Controller",
+                title: "Cannot Delete Cache",
                 message: "You are not the creator of this cache",
                 preferredStyle: .alert)
             controller.addAction(UIAlertAction(
