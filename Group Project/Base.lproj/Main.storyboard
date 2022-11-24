@@ -188,11 +188,26 @@
                                     <action selector="cacheButtonPressed:" destination="Rap-oP-eEB" eventType="touchUpInside" id="M7R-PX-gzR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GmI-L7-d7d">
+                                <rect key="frame" x="134" y="726" width="124" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Get QR Code"/>
+                                <connections>
+                                    <segue destination="KT5-KX-ZTi" kind="show" identifier="codeSegueIdentifier" id="uAg-Aq-vdw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="84P-RK-y3I"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create Cache" id="3Cl-x5-mpY"/>
+                    <navigationItem key="navigationItem" title="Create Cache" id="3Cl-x5-mpY">
+                        <barButtonItem key="rightBarButtonItem" image="qrcode.viewfinder" catalog="system" id="Dv7-od-92E">
+                            <connections>
+                                <segue destination="DIc-9j-7Yi" kind="show" identifier="confirmSegueIdentifier" id="H0J-4h-Hki"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="diffLabel" destination="6bs-qN-MMH" id="4cX-nV-Fay"/>
                         <outlet property="hazardLabel" destination="Ipf-pT-xEC" id="NN5-3S-kfE"/>
@@ -202,7 +217,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNB-lg-bpe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4571" y="-838"/>
+            <point key="canvasLocation" x="4570.7692307692305" y="-838.15165876777246"/>
+        </scene>
+        <!--Confirmation View Controller-->
+        <scene sceneID="sx6-EP-a1G">
+            <objects>
+                <viewController id="DIc-9j-7Yi" customClass="ConfirmationViewController" customModule="Group_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="goY-Pz-plP">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="VJS-SN-fb3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CZn-kM-Ej7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tkO-dM-hJj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5405" y="-1111"/>
         </scene>
         <!--GPS-->
         <scene sceneID="vNj-ah-uKU">
@@ -213,7 +244,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xDN-v4-J2J">
-                                <rect key="frame" x="-7" y="721" width="387" height="46"/>
+                                <rect key="frame" x="-8" y="720" width="387" height="47"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="person" catalog="system" width="231.66667175292969" id="zJR-f9-ZJd">
@@ -254,11 +285,6 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="GPS" id="6DU-Ei-2ji" colorLabel="IBBuiltInLabel-Gray">
-                        <barButtonItem key="leftBarButtonItem" image="qrcode" catalog="system" id="Roq-YX-Xpm">
-                            <connections>
-                                <segue destination="KT5-KX-ZTi" kind="show" id="6as-sW-GTc"/>
-                            </connections>
-                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="camera" catalog="system" id="W7U-SQ-Umq">
                                 <connections>
@@ -455,7 +481,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nc-qX-wTO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2384.6153846153848" y="1487.914691943128"/>
+            <point key="canvasLocation" x="3642" y="1641"/>
         </scene>
         <!--Settings-->
         <scene sceneID="fjL-4f-Knq">
@@ -786,7 +812,7 @@
         <image name="person" catalog="system" width="128" height="121"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="qrcode" catalog="system" width="128" height="114"/>
+        <image name="qrcode.viewfinder" catalog="system" width="128" height="115"/>
         <image name="space2" width="1024" height="1024"/>
         <image name="trophy.fill" catalog="system" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">

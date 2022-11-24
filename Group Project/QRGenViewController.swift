@@ -16,12 +16,14 @@ class QRGenViewController: UIViewController {
     @IBOutlet weak var qrImageView: UIImageView!
     
     var qrImage: UIImage? = nil
+    var titleName:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let codeString = "\((Auth.auth().currentUser?.email)!)-\(titleName)"
         
-        qrImage = generateQRCode(from: (Auth.auth().currentUser?.email)!)
+        qrImage = generateQRCode(from: codeString)
                 
         print(qrImage!)
                 

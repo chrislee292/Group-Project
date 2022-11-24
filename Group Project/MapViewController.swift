@@ -79,7 +79,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("View")
+        //print("View")
         mapView.removeAnnotations(mapView.annotations)
         
         let cacheRef = db.collection("caches")
@@ -187,7 +187,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             let radNear:Double = 50.0
             for point in anno{
-                if skipFirst != 0{
+                if floor(point.coordinate.latitude) != floor(localPos.coordinate.latitude) && floor(point.coordinate.longitude) != floor(localPos.coordinate.longitude){
                     //print("\(point.coordinate.latitude),\(point.coordinate.longitude)")
                     let distanceInMeters = localPos.distance(from: CLLocation(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude))
                     //print(distanceInMeters)

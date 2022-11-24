@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
@@ -21,6 +21,12 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        emailField.delegate = self
+        usernameField.delegate = self
+        firstNameField.delegate = self
+        lastNameField.delegate = self
+        passwordField.delegate = self
         
         passwordField.isSecureTextEntry = true
         
@@ -57,7 +63,8 @@ class SignUpViewController: UIViewController {
             "lastName": lastNameField.text!,
             "password": passwordField.text!,
             "amountOfFinds": 0,
-            "profilePhotoLink": ""
+            "profilePhotoLink": "",
+            "foundCaches":[]
         ]) { err in
         if let err = err {
             print("Error writing document: \(err)")
@@ -66,5 +73,16 @@ class SignUpViewController: UIViewController {
         }
         }
     }
+    // Called when 'return' key pressed
+
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
+    // Called when the user clicks on the view outside of the UITextField
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

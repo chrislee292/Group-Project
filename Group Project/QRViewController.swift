@@ -105,33 +105,45 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
             }
         }
         
-        if result != userEmail && result != "No QR code found"
-        {
-            var finds = 0
-            let db = Firestore.firestore()
-            let docRef = db.collection("userInfo").document(userEmail!)
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data: \(dataDescription)")
-                    let data = document.data()
-                    let amountOfFinds = data!["amountOfFinds"]! as? Int ?? 0
-                    finds = amountOfFinds
-                }
+        var resultArr = result.components(separatedBy: "-")
+        
+        var user = resultArr[0]
+        var title = resultArr[1]
+        var finds = 0
+        var arrayFound:[String] = []
+        
+        let db = Firestore.firestore()
+        let docRef = db.collection("userInfo").document(userEmail!)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                let data = document.data()
+                let amountOfFinds = data!["amountOfFinds"]! as? Int ?? 0
+                // add this to userdata
+                arrayFound = (data!["foundCaches"]! as? [String])!
+                finds = amountOfFinds
             }
-            db.collection("userInfo").document(userEmail!).setData([ "amountOfFinds": finds+1 ], merge: true)
-        }
-        else{
-            let controller = UIAlertController(
-                title: "Invalid Cache",
-                message: "You are the owner of this cache",
-                preferredStyle: .alert)
             
-            controller.addAction(UIAlertAction(
-                title: "OK",
-                style: .default))
-                    
-            present(controller, animated: true)
+            
+            if user != self.userEmail! && self.result != "No QR code found" && arrayFound.contains("cache_\(title)")
+            {
+                arrayFound.append("cache_\(title)")
+                db.collection("userInfo").document(self.userEmail!).updateData([ "amountOfFinds": finds+1 ])
+                db.collection("userInfo").document(self.userEmail!).updateData([ "foundCaches": arrayFound ])
+            }
+            else{
+                let controller = UIAlertController(
+                    title: "Invalid Cache",
+                    message: "You are the owner of this cache",
+                    preferredStyle: .alert)
+                
+                controller.addAction(UIAlertAction(
+                    title: "OK",
+                    style: .default))
+                
+                self.present(controller, animated: true)
+            }
         }
     }
 }

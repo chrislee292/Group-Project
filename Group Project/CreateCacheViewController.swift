@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import CoreLocation
 
-class CreateCacheViewController: UIViewController, CLLocationManagerDelegate {
+class CreateCacheViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var hazardLabel: UITextField!
@@ -43,6 +43,11 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titleLabel.delegate = self
+        hazardLabel.delegate = self
+        hintLabel.delegate = self
+        
         locationManager.delegate = self
         
         startLocation = nil
@@ -99,8 +104,8 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate {
             let cacheRef = db.collection("caches")
             cacheRef.document("cache_\( titleLabel.text ?? "")").setData([
                 "title": titleLabel.text ?? "",
-                "latitude": lat,
-                "longitude": long,
+                "latitude": 0.0, // change to other value?
+                "longitude": 0.0, // change to other value?
                 "difficulty": "\(diff)",
                 "hazards": hazardLabel.text ?? "",
                 "hints": hintLabel.text ?? "",
@@ -111,5 +116,31 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate {
             present(controller, animated: true)
             //performSegue(withIdentifier: "return", sender: (Any).self)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "codeSegueIdentifier",
+           let nextVC = segue.destination as? QRGenViewController{
+            nextVC.titleName = titleLabel.text!
+        }
+        
+        if segue.identifier == "confirmSegueIdentifier",
+           let nextVC = segue.destination as? ConfirmationViewController{
+            nextVC.titleName = titleLabel.text!
+            nextVC.currentLat = lat
+            nextVC.currentLong = long
+        }
+    }
+    // Called when 'return' key pressed
+
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Called when the user clicks on the view outside of the UITextField
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
