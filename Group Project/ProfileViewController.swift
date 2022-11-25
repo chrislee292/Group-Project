@@ -70,7 +70,6 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-
     
     @IBAction func editButton(_ sender: Any) {
         performSegue(withIdentifier: self.segueIdentifier, sender: self)

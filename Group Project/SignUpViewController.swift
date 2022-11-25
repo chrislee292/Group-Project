@@ -70,7 +70,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             print("Error writing document: \(err)")
         } else {
             print("Document successfully written!")
-        }
+            }
         }
     }
     // Called when 'return' key pressed

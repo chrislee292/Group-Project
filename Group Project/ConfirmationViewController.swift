@@ -156,7 +156,11 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
                     
                     controller.addAction(UIAlertAction(
                         title: "OK",
-                        style: .default))
+                        style: .default,
+                        handler:{
+                            (action) in
+                            _ = self.navigationController?.popViewController(animated: true)
+                        }))
                             
                     self.present(controller, animated: true)
                 }

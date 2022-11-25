@@ -126,11 +126,35 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
             }
             
             
-            if user != self.userEmail! && self.result != "No QR code found" && arrayFound.contains("cache_\(title)")
+            if user != self.userEmail! && self.result != "No QR code found" && arrayFound.contains("cache_\(title)") == false
             {
                 arrayFound.append("cache_\(title)")
                 db.collection("userInfo").document(self.userEmail!).updateData([ "amountOfFinds": finds+1 ])
                 db.collection("userInfo").document(self.userEmail!).updateData([ "foundCaches": arrayFound ])
+                let controller = UIAlertController(
+                    title: "Cache Scanned!",
+                    message: "You Have Found a Cache!",
+                    preferredStyle: .alert)
+                
+                controller.addAction(UIAlertAction(
+                    title: "OK",
+                    style: .default,
+                    handler: {
+                        (action) in
+                        _ = self.navigationController?.popViewController(animated: true)
+                    }))
+                
+                self.present(controller, animated: true)
+            }
+            else if user != self.userEmail! && self.result != "No QR code found" && arrayFound.contains("cache_\(title)") == true{
+                let controller = UIAlertController(
+                    title: "Invalid Cache",
+                    message: "You Have already scanned this cache!",
+                    preferredStyle: .alert)
+                
+                controller.addAction(UIAlertAction(
+                    title: "OK",
+                    style: .default))
             }
             else{
                 let controller = UIAlertController(
