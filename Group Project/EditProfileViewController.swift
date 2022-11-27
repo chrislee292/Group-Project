@@ -38,13 +38,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 return
             } else {
                 let profilePhotoURL = snapshot?.get("profilePhotoLink")
-                print("profilePhotoURL = \(profilePhotoURL!)")
-                profilePhotoReference = storage.reference(forURL: profilePhotoURL as! String)
-                profilePhotoReference.downloadURL { (url, error) in
-                    let data = NSData(contentsOf: url!)
-                    let image = UIImage(data: data! as Data)
-                    self.profilePhoto.contentMode = .scaleAspectFit
-                    self.profilePhoto.image = image
+                if (profilePhotoURL as! String != "") {
+                    print("profilePhotoURL = \(profilePhotoURL!)")
+                    profilePhotoReference = storage.reference(forURL: profilePhotoURL as! String)
+                    profilePhotoReference.downloadURL { (url, error) in
+                        let data = NSData(contentsOf: url!)
+                        let image = UIImage(data: data! as Data)
+                        self.profilePhoto.contentMode = .scaleAspectFit
+                        self.profilePhoto.image = image
+                        self.profilePhoto.layer.cornerRadius = self.profilePhoto.frame.size.height / 2
+                        self.profilePhoto.clipsToBounds = true
+                        self.profilePhoto.layer.borderColor = UIColor.black.cgColor
+                        self.profilePhoto.layer.borderWidth = 1
+                    }
                 }
             }
         }
@@ -93,13 +99,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 return
             } else {
                 let profilePhotoURL = snapshot?.get("profilePhotoLink")
-                print("profilePhotoURL = \(profilePhotoURL!)")
-                profilePhotoReference = storage.reference(forURL: profilePhotoURL as! String)
-                profilePhotoReference.downloadURL { (url, error) in
-                    let data = NSData(contentsOf: url!)
-                    let image = UIImage(data: data! as Data)
-                    self.profilePhoto.contentMode = .scaleAspectFit
-                    self.profilePhoto.image = chosenImage
+                if (profilePhotoURL as! String != "") {
+                    print("profilePhotoURL = \(profilePhotoURL!)")
+                    profilePhotoReference = storage.reference(forURL: profilePhotoURL as! String)
+                    profilePhotoReference.downloadURL { (url, error) in
+                        let data = NSData(contentsOf: url!)
+                        let image = UIImage(data: data! as Data)
+                        self.profilePhoto.contentMode = .scaleAspectFit
+                        self.profilePhoto.image = image
+                        self.profilePhoto.layer.cornerRadius = self.profilePhoto.frame.size.height / 2
+                        self.profilePhoto.clipsToBounds = true
+                        self.profilePhoto.layer.borderColor = UIColor.black.cgColor
+                        self.profilePhoto.layer.borderWidth = 1
+                    }
                 }
             }
         }
