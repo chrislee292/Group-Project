@@ -9,8 +9,9 @@ import UIKit
 import AVFoundation
 import Firebase
 import Foundation
+import CoreLocation
 
-class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLocationManagerDelegate {
 
     var capture = AVCaptureSession()
     var vid = AVCaptureVideoPreviewLayer()
@@ -20,11 +21,22 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
     var titleName:String = ""
     var currentLat:Double = 0.0
     var currentLong:Double = 0.0
+    var currentPos = CLLocation(latitude: 0.0, longitude: 0.0)
     
-    let timerQueue = DispatchQueue(label: "timeQueue", qos: .background)
+    var locationManager: CLLocationManager = CLLocationManager()
+    var startLocation: CLLocation!
+    
+    //let timerQueue = DispatchQueue(label: "timeQueue", qos: .background)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.delegate = self
+        startLocation = nil
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest       // Use the "best accuracy" setting
+        locationManager.requestWhenInUseAuthorization()                 // Ask user for permission to use location
+        locationManager.startUpdatingLocation()
+        
         //making session
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil{
             
@@ -94,7 +106,18 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
             alertVC.addAction(okAction)
             present(alertVC,animated:true)
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager,
+                         didUpdateLocations locations: [CLLocation])
+    {
+        let latestLocation:CLLocation = locations[locations.count - 1]
         
+        currentLat = Double(latestLocation.coordinate.latitude)
+        currentLong = Double(latestLocation.coordinate.longitude)
+        
+        //lat = Double(String(format: "%.4f",latestLocation.coordinate.latitude))
+        //long = Double(String(format: "%.4f",latestLocation.coordinate.longitude))
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
@@ -118,34 +141,19 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
         var user = resultArr[0]
         var title = resultArr[1]
         
-        print(user)
-        print(title)
-        print(result)
-        print(userEmail!)
-        print(titleName)
-        
         let db = Firestore.firestore()
-        let docRef = db.collection("caches").document()
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-                let data = document.data()
-                let amountOfFinds = data!["amountOfFinds"]! as? Int ?? 0
-                // add this to userdata
-            }
-        }
-        //exist = try db.collection("caches").document("cache_\(title)").getDocument().exists
-        //await exist = try db.collection("caches").document("cache_\(title)").getDocument().exists
+        //let docRef = db.collection("caches").document()
         
         let docRefBool = db.collection("caches").document("cache_\(title)")
         var docExist = false
 
         docRefBool.getDocument { (document, error) in
             if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                let data = document.data()
                 docExist = true
-                if user == self.userEmail! && self.result != "No QR code found" && docExist
+                let clat = data!["latitude"]! as? Double ?? 0.0
+                
+                if user == self.userEmail! && self.result != "No QR code found" && docExist && (data!["latitude"]! as? Double ?? 0.0 == 0.0) && (data!["longitude"]! as? Double ?? 0.0 == 0.0)
                 {
                     let db = Firestore.firestore()
                     db.collection("caches").document("cache_\(title)").updateData(["latitude": self.currentLat, "longitude": self.currentLong])
@@ -159,7 +167,23 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
                         style: .default,
                         handler:{
                             (action) in
-                            _ = self.navigationController?.popViewController(animated: true)
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }))
+                            
+                    self.present(controller, animated: true)
+                } else if user == self.userEmail! && (data!["latitude"]! as? Double ?? 0.0 != 0.0) && (data!["longitude"]! as? Double ?? 0.0 != 0.0){
+                    
+                    let controller = UIAlertController(
+                        title: "Cannot Create Cache",
+                        message: "This cache has already been established",
+                        preferredStyle: .alert)
+                    
+                    controller.addAction(UIAlertAction(
+                        title: "OK",
+                        style: .default,
+                        handler:{
+                            (action) in
+                            self.navigationController?.popToRootViewController(animated: true)
                         }))
                             
                     self.present(controller, animated: true)
@@ -178,36 +202,7 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
                 }
             } else {
                 print("Document does not exist")
-                print("hi")
             }
         }
-        print(docExist)
-        /*if user == userEmail! && result != "No QR code found" && docExist
-        {
-            let db = Firestore.firestore()
-                db.collection("caches").document("cache_\(titleName)").updateData(["latitude": currentLat, "longitude": currentLong])
-            let controller = UIAlertController(
-                title: "Cache Created",
-                message: "This cache is created at your location",
-                preferredStyle: .alert)
-            
-            controller.addAction(UIAlertAction(
-                title: "OK",
-                style: .default))
-                    
-            present(controller, animated: true)
-        }
-        else{
-            let controller = UIAlertController(
-                title: "Invalid Cache",
-                message: "This is the wrong QR code",
-                preferredStyle: .alert)
-            
-            controller.addAction(UIAlertAction(
-                title: "OK",
-                style: .default))
-                    
-            present(controller, animated: true)
-        }*/
     }
 }

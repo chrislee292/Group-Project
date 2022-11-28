@@ -116,8 +116,6 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
         let docRef = db.collection("userInfo").document(userEmail!)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
                 let data = document.data()
                 let amountOfFinds = data!["amountOfFinds"]! as? Int ?? 0
                 // add this to userdata
@@ -125,9 +123,9 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                 finds = amountOfFinds
             }
             
-            
             if user != self.userEmail! && self.result != "No QR code found" && arrayFound.contains("cache_\(title)") == false
             {
+                print(finds)
                 arrayFound.append("cache_\(title)")
                 db.collection("userInfo").document(self.userEmail!).updateData([ "amountOfFinds": finds+1 ])
                 db.collection("userInfo").document(self.userEmail!).updateData([ "foundCaches": arrayFound ])
@@ -141,20 +139,22 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                     style: .default,
                     handler: {
                         (action) in
-                        _ = self.navigationController?.popViewController(animated: true)
+                        self.navigationController?.popViewController(animated: true)
                     }))
                 
                 self.present(controller, animated: true)
             }
-            else if user != self.userEmail! && self.result != "No QR code found" && arrayFound.contains("cache_\(title)") == true{
+            else if user != self.userEmail! && arrayFound.contains("cache_\(title)") == true{
                 let controller = UIAlertController(
                     title: "Invalid Cache",
-                    message: "You Have already scanned this cache!",
+                    message: "You have already scanned this cache!",
                     preferredStyle: .alert)
                 
                 controller.addAction(UIAlertAction(
                     title: "OK",
                     style: .default))
+                
+                self.present(controller, animated: true)
             }
             else{
                 let controller = UIAlertController(

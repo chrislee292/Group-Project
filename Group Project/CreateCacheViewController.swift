@@ -57,7 +57,7 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate, UI
         
     }
     
-    func locationManager(_ manager: CLLocationManager,
+    /*func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation])
     {
         let latestLocation:CLLocation = locations[locations.count - 1]
@@ -67,7 +67,7 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate, UI
         
         //lat = Double(String(format: "%.4f",latestLocation.coordinate.latitude))
         //long = Double(String(format: "%.4f",latestLocation.coordinate.longitude))
-    }
+    }*/
     
     @IBAction func cacheButtonPressed(_ sender: Any) {
         
@@ -127,8 +127,8 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate, UI
         if segue.identifier == "confirmSegueIdentifier",
            let nextVC = segue.destination as? ConfirmationViewController{
             nextVC.titleName = titleLabel.text!
-            nextVC.currentLat = lat
-            nextVC.currentLong = long
+            //nextVC.currentLat = lat
+            //nextVC.currentLong = long
         }
     }
     // Called when 'return' key pressed
