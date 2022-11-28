@@ -83,7 +83,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.removeAnnotations(mapView.annotations)
         
         let cacheRef = db.collection("caches")
-        var counter = 0
         
         cacheRef.getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -100,7 +99,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     pinMarker.title = pinTitle
                     pinMarker.coordinate = CLLocationCoordinate2D(latitude: lati, longitude: longi)
                     self.mapView.addAnnotation(pinMarker)
-                    counter += 1
+                    
+                    let circle = MKCircle(center: CLLocationCoordinate2D(latitude: lati, longitude: longi), radius: 20)
+                    self.mapView.addOverlay(circle)
                 }
             }
         }
@@ -142,6 +143,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let circleRenderer = MKCircleRenderer(overlay: overlay)
+        circleRenderer.strokeColor = UIColor.blue
+        circleRenderer.lineWidth = 1.0
+        circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.1)
+        return circleRenderer
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "locationSegueIdentifier",
             //... ADD SEGUE CODE
@@ -150,13 +159,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             nextCacheVC.titleName = String((sender as! MKAnnotationView).annotation!.title!!)
             //nextCacheVC.titleName = (sender as! MKPointAnnotation).title!
-        }
-        
-        if segue.identifier == "createCacheSegueIdentifier",
-        
-        let nextCacheVC = segue.destination as? CreateCacheViewController{
-            
-            nextCacheVC.currentPos = localPos
         }
     }
     

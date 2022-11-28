@@ -146,7 +146,7 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
         
         let docRefBool = db.collection("caches").document("cache_\(title)")
         var docExist = false
-
+        
         docRefBool.getDocument { (document, error) in
             if let document = document, document.exists {
                 let data = document.data()
@@ -156,7 +156,8 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
                 if user == self.userEmail! && self.result != "No QR code found" && docExist && (data!["latitude"]! as? Double ?? 0.0 == 0.0) && (data!["longitude"]! as? Double ?? 0.0 == 0.0)
                 {
                     let db = Firestore.firestore()
-                    db.collection("caches").document("cache_\(title)").updateData(["latitude": self.currentLat, "longitude": self.currentLong])
+                    var newCoords = self.randomCoord(lati: self.currentLat, longi: self.currentLong)
+                    db.collection("caches").document("cache_\(title)").updateData(["latitude": newCoords[0], "longitude": newCoords[1]])
                     let controller = UIAlertController(
                         title: "Cache Created",
                         message: "This cache is created at your location",
@@ -204,5 +205,15 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
                 print("Document does not exist")
             }
         }
+    }
+    func randomCoord(lati:Double, longi:Double) -> [Double]{
+        var addLat = Double.random(in: -20.0 ..< 20.0) * 0.000008983
+        var newLat = lati + addLat
+        var addLong = (Double.random(in: -20.0 ..< 20.0) * 0.000008983)/cos(lati * 0.01745)
+        var newLong = longi + addLong
+        
+        var newCoord = [newLat, newLong]
+        
+        return newCoord
     }
 }
