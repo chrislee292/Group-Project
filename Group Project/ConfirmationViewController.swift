@@ -79,7 +79,6 @@ class ConfirmationViewController: UIViewController, AVCaptureMetadataOutputObjec
                 
                 capture.startRunning()
                 
-                
                 //QR Code Frame for QR code
                 
                 qrcodeinview = UIView()

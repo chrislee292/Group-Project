@@ -327,7 +327,6 @@
                         <viewLayoutGuide key="safeArea" id="iXZ-7Y-CYx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="I5F-I7-FrU"/>
                     <navigationItem key="navigationItem" title="User Profile" id="V1p-iD-5pC">
                         <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="x7V-Y9-Ck0">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="mfI-kC-MPr">
@@ -353,14 +352,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qf5-Re-u1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3642" y="847"/>
+            <point key="canvasLocation" x="4570.7692307692305" y="846.6824644549763"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="ZPA-Vw-EvF">
             <objects>
                 <viewController id="Ep7-sy-4BG" customClass="EditProfileViewController" customModule="Group_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pdv-3L-TlZ">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Id3-c8-Z9Q">
@@ -516,7 +515,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ENd-5F-fTk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4571" y="848"/>
+            <point key="canvasLocation" x="5500" y="847.39336492890993"/>
         </scene>
         <!--Gen View Controller-->
         <scene sceneID="lvw-9A-L4z">
@@ -550,7 +549,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zp-dX-tPS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3538" y="-810"/>
+            <point key="canvasLocation" x="4098" y="-950"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="h9x-Tv-ihI">
@@ -753,7 +752,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="S4T-b9-G3l" kind="relationship" relationship="viewControllers" id="of5-2c-BPI"/>
-                        <segue destination="jy4-bA-cvQ" kind="relationship" relationship="viewControllers" id="24b-gO-GQF"/>
+                        <segue destination="hrX-6A-SDl" kind="relationship" relationship="viewControllers" id="24b-gO-GQF"/>
                         <segue destination="miZ-co-u1r" kind="relationship" relationship="viewControllers" id="oii-kt-VVN"/>
                         <segue destination="dPI-hA-RDi" kind="relationship" relationship="viewControllers" id="fYD-iu-QwU"/>
                     </connections>
@@ -780,6 +779,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vue-MK-sok" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5500" y="3.5545023696682461"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="TNf-mN-h2E">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hrX-6A-SDl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="I5F-I7-FrU"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n71-cZ-kcf">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jy4-bA-cvQ" kind="relationship" relationship="rootViewController" id="Iqh-Ld-lBg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkd-4a-wn3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3641.5384615384614" y="846.6824644549763"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
