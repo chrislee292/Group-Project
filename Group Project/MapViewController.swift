@@ -16,8 +16,6 @@ protocol NotifDistance{
     func tellDistance(notif:Bool)
 }
 
-var coordArray: [MKPointAnnotation] = []
-
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, NotifDistance{
 
     @IBOutlet var mapView: MKMapView!
@@ -47,9 +45,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             } else if let error = error{
                 print(error.localizedDescription)
             }
+        }
+        
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
-        }
 
         locationManager.requestAlwaysAuthorization()
         
@@ -191,7 +190,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             let radNear:Double = 50.0
             for point in anno{
-                if floor(point.coordinate.latitude) != floor(localPos.coordinate.latitude) && floor(point.coordinate.longitude) != floor(localPos.coordinate.longitude){
+                if point.coordinate.latitude != localPos.coordinate.latitude && point.coordinate.longitude != localPos.coordinate.longitude{
                     //print("\(point.coordinate.latitude),\(point.coordinate.longitude)")
                     let distanceInMeters = localPos.distance(from: CLLocation(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude))
                     //print(distanceInMeters)

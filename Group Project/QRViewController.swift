@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import Firebase
+import CoreData
 
 class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -129,6 +130,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                 arrayFound.append("cache_\(title)")
                 db.collection("userInfo").document(self.userEmail!).updateData([ "amountOfFinds": finds+1 ])
                 db.collection("userInfo").document(self.userEmail!).updateData([ "foundCaches": arrayFound ])
+                
                 let controller = UIAlertController(
                     title: "Cache Scanned!",
                     message: "You Have Found a Cache!",
@@ -140,6 +142,21 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                     handler: {
                         (action) in
                         self.navigationController?.popViewController(animated: true)
+                        let docRefCache = db.collection("caches").document("cache_\(title)")
+                        // grabs whats in the document of the specific annotation
+                        docRefCache.getDocument { (document, error) in
+                            if let document = document, document.exists {
+                                let data = document.data()
+                                let cDifficulty = data!["difficulty"]! as? String ?? ""
+                                let cHazards = data!["hazards"]! as? String ?? ""
+                                let cHints = data!["hints"]! as? String ?? ""
+                                let cTitle = data!["title"]! as? String ?? ""
+                                let cEmail = data!["email"]! as? String ?? ""
+                                let cLat = data!["latitude"]! as? Double ?? 0.0
+                                let cLong = data!["longitude"]! as? Double ?? 0.0
+                                self.storeCache(cDiff: Int(cDifficulty)!, cEmail: cEmail, cHazard: cHazards, cHints: cHints, cLatitude: cLat, cLongitude: cLong, cTitle: cTitle)
+                            }
+                        }
                     }))
                 
                 self.present(controller, animated: true)
@@ -167,6 +184,39 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                     style: .default))
                 
                 self.present(controller, animated: true)
+            }
+        }
+    }
+    // protocol method to create a pizza
+    func storeCache(cDiff: Int, cEmail:String, cHazard:String, cHints: String, cLatitude: Double, cLongitude: Double, cTitle: String){
+        
+        // add a pizza to the core data
+        let cache = NSEntityDescription.insertNewObject(forEntityName: "CacheData", into: context)
+        
+        // set the values of the pizza in the core data
+        cache.setValue(cDiff, forKey: "difficulty")
+        cache.setValue(cEmail, forKey: "email")
+        cache.setValue(cHazard, forKey: "hazards")
+        cache.setValue(cHints, forKey: "hints")
+        cache.setValue(cLatitude, forKey: "latitude")
+        cache.setValue(cLongitude, forKey: "longitude")
+        cache.setValue(cTitle, forKey: "title")
+        
+        // commit the changes
+        saveContext()
+    }
+    
+    // save the core data changes
+    func saveContext () {
+        // check for changes
+        if context.hasChanges {
+            do {
+                // save
+                try context.save()
+            } catch {
+                // error
+                let nserror = error as NSError
+                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
