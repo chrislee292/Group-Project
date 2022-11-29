@@ -47,6 +47,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             } else if let error = error{
                 print(error.localizedDescription)
             }
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         }
 
         locationManager.requestAlwaysAuthorization()
