@@ -273,7 +273,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="VJS-SN-fb3"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="separatorColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="CZn-kM-Ej7"/>
                 </viewController>
@@ -845,7 +845,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="nIK-Sg-wbt"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="separatorColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="QR Scanner" image="qrcode" catalog="system" id="Lgu-oB-9Lo"/>
                     <navigationItem key="navigationItem" title="Camera" id="Ve2-ku-GTF"/>
