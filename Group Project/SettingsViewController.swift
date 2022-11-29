@@ -19,6 +19,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         // Do any additional setup after loading the view.
+        create_header()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        create_header()
+    }
+    
+    func create_header() {
+        let headerView: UIView = UIView.init(frame: CGRect(x: self.view.frame.minX, y: self.view.frame.minY, width: self.view.frame.width, height: 40))
+        headerView.backgroundColor = .lightGray
+        headerView.center.x = self.view.center.x
+
+        let label: UILabel = UILabel.init(frame: CGRect(x: 4, y: 5, width: 276, height: 24))
+        label.center = headerView.center
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
+        label.text = "Settings"
+        headerView.addSubview(label)
+        
+        self.tableView.tableHeaderView = headerView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -49,7 +70,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        switch section {
+        case 0: return 3
+        default: return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,8 +88,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-
-        return "Test Header"
+        switch section {
+        case 1: return "Account Settings"
+        default: return nil
+        }
     }
 
 }
