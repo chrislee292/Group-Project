@@ -112,6 +112,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="earth" translatesAutoresizingMaskIntoConstraints="NO" id="V3b-EL-6HB">
+                                <rect key="frame" x="-39" y="377" width="447" height="567"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4X0-1t-gp1">
                                 <rect key="frame" x="44" y="91" width="42" height="28"/>
                                 <constraints>
@@ -189,21 +193,18 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GmI-L7-d7d">
-                                <rect key="frame" x="134" y="726" width="124" height="84"/>
+                                <rect key="frame" x="134" y="726" width="124" height="34.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="124" id="XVm-wJ-Eja"/>
                                     <constraint firstAttribute="height" constant="35" id="Yy2-3V-cqN"/>
                                 </constraints>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Get QR Code"/>
                                 <connections>
                                     <segue destination="KT5-KX-ZTi" kind="show" identifier="codeSegueIdentifier" id="uAg-Aq-vdw"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="earth" translatesAutoresizingMaskIntoConstraints="NO" id="V3b-EL-6HB">
-                                <rect key="frame" x="-39" y="377" width="447" height="567"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="84P-RK-y3I"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -263,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNB-lg-bpe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5363.0769230769229" y="-901.42180094786727"/>
+            <point key="canvasLocation" x="5363" y="-997"/>
         </scene>
         <!--Confirmation View Controller-->
         <scene sceneID="sx6-EP-a1G">
@@ -279,7 +280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tkO-dM-hJj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6162" y="-1114"/>
+            <point key="canvasLocation" x="6577" y="-997"/>
         </scene>
         <!--GPS-->
         <scene sceneID="vNj-ah-uKU">
@@ -331,6 +332,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="iv7-k1-xcl">
+                                <rect key="frame" x="75" y="92" width="240" height="216"/>
+                                <color key="tintColor" red="0.081845991310000005" green="0.49414008860000003" blue="0.99997764830000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zS0-rR-Cql">
                                 <rect key="frame" x="16" y="342" width="358" height="21"/>
                                 <constraints>
@@ -366,10 +371,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="iv7-k1-xcl">
-                                <rect key="frame" x="75" y="92" width="240" height="216"/>
-                                <color key="tintColor" red="0.081845991310000005" green="0.49414008860000003" blue="0.99997764830000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iXZ-7Y-CYx"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -908,7 +909,7 @@
                                     <action selector="deleteButtonPressed:" destination="IUe-C0-krp" eventType="touchUpInside" id="FrT-q9-otR"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marker" translatesAutoresizingMaskIntoConstraints="NO" id="874-ih-zLG">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="marker" translatesAutoresizingMaskIntoConstraints="NO" id="874-ih-zLG">
                                 <rect key="frame" x="-61" y="602" width="512" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="qlB-Nj-GPo"/>
@@ -924,9 +925,7 @@
                             <constraint firstItem="fNY-ca-AHF" firstAttribute="bottom" secondItem="NtX-jI-mXl" secondAttribute="bottom" constant="396" id="Zi0-nj-DeH"/>
                             <constraint firstItem="fNY-ca-AHF" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NtX-jI-mXl" secondAttribute="trailing" symbolic="YES" id="dea-9R-V5d"/>
                             <constraint firstItem="FaU-PW-yu3" firstAttribute="top" secondItem="fNY-ca-AHF" secondAttribute="top" constant="58" id="e1E-ZG-hOa"/>
-                            <constraint firstItem="fNY-ca-AHF" firstAttribute="bottom" secondItem="874-ih-zLG" secondAttribute="bottom" constant="31" id="gve-sB-pEU"/>
                             <constraint firstItem="I3x-zs-LZS" firstAttribute="top" secondItem="FaU-PW-yu3" secondAttribute="bottom" constant="48" id="jiC-dO-nbo"/>
-                            <constraint firstItem="874-ih-zLG" firstAttribute="centerX" secondItem="W9T-0i-9e1" secondAttribute="centerX" id="rt6-yk-5bQ"/>
                             <constraint firstItem="I3x-zs-LZS" firstAttribute="leading" secondItem="fNY-ca-AHF" secondAttribute="leading" constant="51" id="trd-01-fOw"/>
                         </constraints>
                     </view>
@@ -1067,8 +1066,8 @@
         <image name="countries" width="835" height="450"/>
         <image name="earth" width="1200" height="1200"/>
         <image name="gear" catalog="system" width="128" height="122"/>
-        <image name="map" catalog="system" width="128" height="112"/>
         <image name="map" width="1200" height="1200"/>
+        <image name="map" catalog="system" width="128" height="112"/>
         <image name="marker" width="512" height="512"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
@@ -1096,6 +1095,9 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
