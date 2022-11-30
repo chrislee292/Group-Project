@@ -34,9 +34,9 @@ class CacheViewController: UIViewController {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 print("Document data: \(dataDescription)")
                 let data = document.data()
-                self.Diff.text = data!["difficulty"]! as? String ?? ""
-                self.Hazards.text = data!["hazards"]! as? String ?? ""
-                self.Hint.text = data!["hints"]! as? String ?? ""
+                self.Diff.text = "Difficulty: \(data!["difficulty"]! as? String ?? "")"
+                self.Hazards.text = "Hazards: \(data!["hazards"]! as? String ?? "")"
+                self.Hint.text = "Hint: \(data!["hints"]! as? String ?? "")"
                 self.name.text = data!["title"]! as? String ?? ""
                 self.creator = data!["email"]! as? String ?? ""
             } else {
