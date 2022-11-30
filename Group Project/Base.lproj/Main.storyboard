@@ -512,15 +512,6 @@
                                 <rect key="frame" x="16" y="62" width="358" height="699"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g7T-ac-g2G">
-                                    <rect key="frame" x="0.0" y="187" width="358" height="92"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Log Out"/>
-                                    <connections>
-                                        <action selector="logOutButton:" destination="miZ-co-u1r" eventType="touchUpInside" id="88H-Nd-sR9"/>
-                                    </connections>
-                                </button>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationsCell" rowHeight="64" id="8SK-ZM-gXT" customClass="NotificationsTableViewCell" customModule="Group_Project" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="358" height="64"/>
@@ -557,6 +548,26 @@
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ButtonCell" rowHeight="65" id="rMY-tD-Ych" customClass="ButtonTableViewCell" customModule="Group_Project" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="159" width="358" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rMY-tD-Ych" id="2gj-Hv-BxD">
+                                            <rect key="frame" x="0.0" y="0.0" width="358" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdj-cV-Cdg">
+                                                    <rect key="frame" x="62" y="22" width="235" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="label" destination="Cdj-cV-Cdg" id="g7a-P9-xox"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

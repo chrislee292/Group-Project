@@ -65,7 +65,7 @@ class ProfileViewController: UIViewController {
                     profilePhotoReference.downloadURL { (url, error) in
                         let data = NSData(contentsOf: url!)
                         let image = UIImage(data: data! as Data)
-                        self.profilePhoto.contentMode = .scaleAspectFit
+                        self.profilePhoto.contentMode = .scaleAspectFill
                         self.profilePhoto.image = image
                         self.profilePhoto.layer.cornerRadius = self.profilePhoto.frame.size.height / 2
                         self.profilePhoto.clipsToBounds = true
