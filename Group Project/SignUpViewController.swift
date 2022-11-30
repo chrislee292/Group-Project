@@ -41,38 +41,47 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
-        Auth.auth().createUser(withEmail: emailField.text!.lowercased(), password: passwordField.text!) {
-            authResult, error in
-            if let error = error as NSError? {
-                let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style:.default)
-                alert.addAction(okAction)
-                self.present(alert, animated: true)
-            } else {
-                let alert = UIAlertController(title: "Test", message: "There was an Unknown Error. Contact Support for Help.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style:.default)
-                alert.addAction(okAction)
-                self.present(alert, animated: true)
-            }
-        }
         
-        let db = Firestore.firestore()
-        db.collection("userInfo").document(emailField.text!.lowercased()).setData([
-            "username": usernameField.text!,
-            "firstName": firstNameField.text!,
-            "lastName": lastNameField.text!,
-            "password": passwordField.text!,
-            "amountOfFinds": 0,
-            "profilePhotoLink": "",
-            "foundCaches":[]
-        ]) { err in
-        if let err = err {
-            print("Error writing document: \(err)")
-        } else {
-            print("Document successfully written!")
+        if (!emailField.text!.isEmpty) && (!usernameField.text!.isEmpty) && (!firstNameField.text!.isEmpty) && (!lastNameField.text!.isEmpty) && (!passwordField.text!.isEmpty) {
+            Auth.auth().createUser(withEmail: emailField.text!.lowercased(), password: passwordField.text!) {
+                authResult, error in
+                if let error = error as NSError? {
+                    let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style:.default)
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true)
+                } else {
+                    let alert = UIAlertController(title: "Test", message: "There was an Unknown Error. Contact Support for Help.", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style:.default)
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true)
+                }
             }
+            
+            let db = Firestore.firestore()
+            db.collection("userInfo").document(emailField.text!.lowercased()).setData([
+                "username": usernameField.text!,
+                "firstName": firstNameField.text!,
+                "lastName": lastNameField.text!,
+                "password": passwordField.text!,
+                "amountOfFinds": 0,
+                "profilePhotoLink": "",
+                "foundCaches":[]
+            ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+                }
+            }
+        } else {
+            let alert = UIAlertController(title: "Missing Fields", message: "Please ensure ALL fields are filled out.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style:.default)
+            alert.addAction(okAction)
+            self.present(alert, animated: true)
         }
     }
+    
     // Called when 'return' key pressed
 
     func textFieldShouldReturn(_ textField:UITextField) -> Bool {
