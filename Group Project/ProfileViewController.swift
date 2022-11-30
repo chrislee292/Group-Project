@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var findAmountLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profilePhoto: UIImageView!
+    @IBOutlet weak var levelLabel: UILabel!
     
     let segueIdentifier = "ProfileToEditProfile"
     let userEmail = Auth.auth().currentUser?.email
@@ -48,6 +49,17 @@ class ProfileViewController: UIViewController {
                 self.nameLabel.text! = "\(firstName) \(lastName)"
                 self.findAmountLabel.text! = "\(amountOfFinds) Finds"
                 self.usernameLabel.text! = "\(username)"
+                if (amountOfFinds < 5) {
+                    self.levelLabel.text! = "Novice"
+                } else if (amountOfFinds >= 5 && amountOfFinds < 15) {
+                    self.levelLabel.text! = "Intermediate"
+                } else if (amountOfFinds >= 15 && amountOfFinds < 30) {
+                    self.levelLabel.text! = "Advanced"
+                } else if (amountOfFinds >= 30 && amountOfFinds < 50) {
+                    self.levelLabel.text! = "Expert"
+                } else {
+                    self.levelLabel.text! = "God"
+                }
             } else {
                 print("Document does not exist")
             }

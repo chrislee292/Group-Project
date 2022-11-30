@@ -130,8 +130,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         case 3:
             Auth.auth().sendPasswordReset(withEmail: self.userEmail!) { error in
                 let controller = UIAlertController(
-                    title: "Error",
-                    message: "There was an error sending the reset password email.",
+                    // Actually an Error
+                    title: "Email Sent",
+                    message: "Your Email Has Been Sent!",
                     preferredStyle: .alert)
                 controller.addAction(UIAlertAction(
                     title: "OK",
