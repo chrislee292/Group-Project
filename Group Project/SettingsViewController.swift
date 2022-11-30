@@ -19,7 +19,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
     let userEmail = Auth.auth().currentUser?.email
-    //let credential = EmailAuthProvider.credential(withEmail: "email", password: "password")
     var notifDistance = 0.0
     
     override func viewDidLoad() {
@@ -129,7 +128,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         switch indexPath.row {
         case 3:
-            Auth.auth().sendPasswordReset(withEmail: userEmail!) { error in
+            Auth.auth().sendPasswordReset(withEmail: self.userEmail!) { error in
                 let controller = UIAlertController(
                     title: "Error",
                     message: "There was an error sending the reset password email.",
@@ -138,8 +137,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     title: "OK",
                     style: .default))
                 self.present(controller, animated: true)
+                print(self.userEmail!)
             }
-            print(userEmail!)
         case 4:
             do {
                 try Auth.auth().signOut()
@@ -158,6 +157,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             controller.addTextField(configurationHandler: {
                 (textField:UITextField!) in
                 textField.placeholder = "Enter something"
+                textField.isSecureTextEntry = true
             })
             controller.addAction(UIAlertAction(
                 title: "OK",
@@ -167,69 +167,57 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     if let textFieldArray = controller.textFields {
                         let textFields = textFieldArray as [UITextField]
                         let enteredText = textFields[0].text
-                        let credential = EmailAuthProvider.credential(withEmail: self.userEmail!, password: enteredText!)
+                        let credential: AuthCredential = EmailAuthProvider.credential(withEmail: self.userEmail!, password: enteredText!)
                         
-                        self.user?.reauthenticate(with: credential)
-                        { error, what  in
-                           if let error = error {
-                               //                  if let error = error {
-                               //                      let controller = UIAlertController(
-                               //                          title: "Error",
-                               //                          message: "There was an error: \(error)",
-                               //                          preferredStyle: .alert)
-                               //                      controller.addAction(UIAlertAction(
-                               //                          title: "OK",
-                               //                          style: .default))
-                               //                      self.present(controller, animated: true)
-                           } else {
-                              // User re-authenticated.
-                               self.user?.updateEmail(to: "newemail")
-                              { error in
-
-                              }
-                           }
+                        self.user!.reauthenticate(with: credential) { (result, error) in
+                            if (error == nil) {
+                                self.db.collection("userInfo").document(self.userEmail!).delete() { error in
+                                    if let error = error {
+                                        let controller = UIAlertController(
+                                            title: "Error",
+                                            message: "There was an error: \(error)",
+                                            preferredStyle: .alert)
+                                        controller.addAction(UIAlertAction(
+                                            title: "OK",
+                                            style: .default))
+                                        self.present(controller, animated: true)
+                                    }
+                                }
+                                
+                                self.user?.delete { error in
+                                    if let error = error {
+                                        let controller = UIAlertController(
+                                            title: "Error",
+                                            message: "There was an error: \(error)",
+                                            preferredStyle: .alert)
+                                        controller.addAction(UIAlertAction(
+                                            title: "OK",
+                                            style: .default))
+                                        self.present(controller, animated: true)
+                                    }
+                                }
+                                
+                                do {
+                                    try Auth.auth().signOut()
+                                    self.dismiss(animated: true)
+                                } catch {
+                                    print("Sign out error")
+                                }
+                                
+                            } else {
+                                let controller = UIAlertController(
+                                    title: "Wrong Password",
+                                    message: "You entered the wrong password. Please try again.",
+                                    preferredStyle: .alert)
+                                controller.addAction(UIAlertAction(
+                                    title: "OK",
+                                    style: .default))
+                                self.present(controller, animated: true)
+                            }
                         }
                     }
                 }))
             present(controller, animated: true)
-//            let controller = UIAlertController(
-//                title: "Are You Sure?",
-//                message: "Are you sure you want to delete your account? Account data is not recoverable.",
-//                preferredStyle: .alert)
-//            controller.addAction(UIAlertAction(
-//                title: "Cancel",
-//                style: .cancel))
-//            controller.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-//                self.db.collection("userInfo").document(self.userEmail!).delete() { error in
-//                    if let error = error {
-//                        let controller = UIAlertController(
-//                            title: "Error",
-//                            message: "There was an error: \(error)",
-//                            preferredStyle: .alert)
-//                        controller.addAction(UIAlertAction(
-//                            title: "OK",
-//                            style: .default))
-//                        self.present(controller, animated: true)
-//                    } else {
-//                        print("Document successfully removed!")
-//                    }
-//                }
-                
-                
-//                self.user?.delete { error in
-//                  if let error = error {
-//                      let controller = UIAlertController(
-//                          title: "Error",
-//                          message: "There was an error: \(error)",
-//                          preferredStyle: .alert)
-//                      controller.addAction(UIAlertAction(
-//                          title: "OK",
-//                          style: .default))
-//                      self.present(controller, animated: true)
-//                  }
-//                }
-//            }))
-//            present(controller, animated: true)
         default:
             return
         }
