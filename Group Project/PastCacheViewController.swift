@@ -41,8 +41,10 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var tableView: UITableView!
     
+    let infoSegueIdentifier = "InfoSegueIdentifier"
     let textCellIdentifier = "TextCell"
     let headerTitles = [5, 4, 3, 2, 1]
+    let sectionImages:[UIImage?] = [UIImage(named: "starfive"), UIImage(named: "starfour"), UIImage(named: "starthree"), UIImage(named: "startwo"), UIImage(named: "starone")]
     
     //var sections: [[Cache]] = [[]]
     
@@ -85,15 +87,35 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
         let row = indexPath.row
         let section = indexPath.section
         // create a cell when needed
-        let cell  = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
+        let cell  = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath) as! PastCacheTableViewCell
+        
+        if Int(coordArray[section][row].cacheDifficulty) == 1{
+            cell.textImageView.image = UIImage(named: "onestar")
+        }
+        if Int(coordArray[section][row].cacheDifficulty) == 2{
+            cell.textImageView.image = UIImage(named: "twostar")
+        }
+        if Int(coordArray[section][row].cacheDifficulty) == 3{
+            cell.textImageView.image = UIImage(named: "threestar")
+        }
+        if Int(coordArray[section][row].cacheDifficulty) == 4{
+            cell.textImageView.image = UIImage(named: "fourstar")
+        }
+        if Int(coordArray[section][row].cacheDifficulty) == 5{
+            cell.textImageView.image = UIImage(named: "fivestar")
+        }
+        
         // fill the cell name with the corresponding pizza attributes
-        cell.textLabel?.text = "\(coordArray[section][row].cacheTitle)"
+        cell.titleLabel.text = "\(coordArray[section][row].cacheTitle)"
         // create the cell
         return cell
     }
     
     // runs when a cell is selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        let section = indexPath.section
+        
         // make an animation that fades when cell is clicked
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -116,8 +138,29 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
         return coordArray.count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    /*func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String(headerTitles[section])
+    }*/
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 80
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let imageView = UIImageView()
+        //print(sectionImages[section])
+        imageView.image = sectionImages[section]
+        let headerView = UIView()
+        //headerView.backgroundColor = .white
+        headerView.addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -169,8 +212,18 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
         coordArray.append(cacheArray3)
         coordArray.append(cacheArray2)
         coordArray.append(cacheArray1)
-        print("hello")
-        print(coordArray)
+        //print("hello")
+        //print(coordArray)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == infoSegueIdentifier,
+           let destination = segue.destination as? PastCacheInfoViewController,
+           let infoIndexRow = tableView.indexPathForSelectedRow?.row,
+           let infoIndexSection = tableView.indexPathForSelectedRow?.section{
+            destination.cacheRow = infoIndexRow
+            destination.cacheSection = infoIndexSection
+        }
     }
     
     func deleteData(row:Int){

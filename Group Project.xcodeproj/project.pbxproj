@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		090659742926FAC9002F5828 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090659732926FAC9002F5828 /* SettingsViewController.swift */; };
+		354A48B52936C5E1002F1190 /* PastCacheTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A48B42936C5E1002F1190 /* PastCacheTableViewCell.swift */; };
+		354A48B72936D16D002F1190 /* PastCacheInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A48B62936D16D002F1190 /* PastCacheInfoViewController.swift */; };
 		356421C12921F361008F5ED6 /* CreateCacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C02921F361008F5ED6 /* CreateCacheViewController.swift */; };
 		356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C22921F379008F5ED6 /* CacheViewController.swift */; };
 		356DEF23292F3212004A90F2 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356DEF22292F3212004A90F2 /* ConfirmationViewController.swift */; };
@@ -35,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		090659732926FAC9002F5828 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		354A48B42936C5E1002F1190 /* PastCacheTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastCacheTableViewCell.swift; sourceTree = "<group>"; };
+		354A48B62936D16D002F1190 /* PastCacheInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastCacheInfoViewController.swift; sourceTree = "<group>"; };
 		356421C02921F361008F5ED6 /* CreateCacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCacheViewController.swift; sourceTree = "<group>"; };
 		356421C22921F379008F5ED6 /* CacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheViewController.swift; sourceTree = "<group>"; };
 		356DEF22292F3212004A90F2 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -101,7 +105,9 @@
 			isa = PBXGroup;
 			children = (
 				B40F10C6291F66F900C541AA /* Main.storyboard */,
+				354A48B62936D16D002F1190 /* PastCacheInfoViewController.swift */,
 				35E7EC7E2935E133007A4147 /* PastCacheViewController.swift */,
+				354A48B42936C5E1002F1190 /* PastCacheTableViewCell.swift */,
 				35F1A0DB292E27C600E2C88F /* QRGenViewController.swift */,
 				356DEF22292F3212004A90F2 /* ConfirmationViewController.swift */,
 				B4995EFB292883F80036CFCC /* EditProfileViewController.swift */,
@@ -212,8 +218,10 @@
 				35F1A0DC292E27C600E2C88F /* QRGenViewController.swift in Sources */,
 				35E7EC7F2935E133007A4147 /* PastCacheViewController.swift in Sources */,
 				B499A330291F370400FC2E5A /* Group_Project.xcdatamodeld in Sources */,
+				354A48B72936D16D002F1190 /* PastCacheInfoViewController.swift in Sources */,
 				B499A326291F370400FC2E5A /* AppDelegate.swift in Sources */,
 				356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */,
+				354A48B52936C5E1002F1190 /* PastCacheTableViewCell.swift in Sources */,
 				B499A328291F370400FC2E5A /* SceneDelegate.swift in Sources */,
 				B40F10C4291F66F200C541AA /* ViewController.swift in Sources */,
 				B4AE0D1D29248EFD005791FF /* ProfileViewController.swift in Sources */,
