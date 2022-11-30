@@ -269,11 +269,26 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="GPS" id="6DU-Ei-2ji" colorLabel="IBBuiltInLabel-Gray">
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="9qo-Qv-Rhi">
-                            <connections>
-                                <segue destination="Rap-oP-eEB" kind="show" id="dCx-sj-pXV"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="plus" catalog="system" id="9qo-Qv-Rhi">
+                                <connections>
+                                    <segue destination="Rap-oP-eEB" kind="show" id="dCx-sj-pXV"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="ks1-XQ-dgd">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="EdW-77-1pK">
+                                    <rect key="frame" x="246" y="5" width="86" height="34.333333333333336"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="  "/>
+                                </button>
+                                <connections>
+                                    <segue destination="IUe-C0-krp" kind="popoverPresentation" identifier="poptocache" popoverAnchorBarButtonItem="ks1-XQ-dgd" id="R6r-Ys-1eo">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -801,7 +816,7 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="IUe-C0-krp" customClass="CacheViewController" customModule="Group_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W9T-0i-9e1">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rq6-YB-hUh">
@@ -981,6 +996,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="UTR-tn-ctf"/>
+        <segue reference="R6r-Ys-1eo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="linkColor"/>
     <resources>

@@ -140,7 +140,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         print(view.annotation!.title!!)
         if control == view.rightCalloutAccessoryView{
-            performSegue(withIdentifier: "locationSegueIdentifier", sender: view)
+            performSegue(withIdentifier: "poptocache", sender: view)
         }
     }
     
@@ -153,7 +153,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "locationSegueIdentifier",
+        if segue.identifier == "poptocache",
             //... ADD SEGUE CODE
            let nextCacheVC = segue.destination as? CacheViewController{
             print("here")
