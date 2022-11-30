@@ -13,7 +13,13 @@ class NotificationsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+//        slider.value = 25
+//        slider.minimumValue = 0
+//        slider.maximumValue = 200
+//        print(slider.value)
+    }
+    
+    func setCell() {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

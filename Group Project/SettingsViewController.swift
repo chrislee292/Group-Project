@@ -66,32 +66,32 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0: return 3
-        default: return 2
-        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
-        cell.textLabel?.text = "test"
-        return cell
+        switch indexPath.row {
+        case 0:
+            let notificationsCell = self.tableView.dequeueReusableCell(withIdentifier: "NotificationsCell", for: indexPath) as! NotificationsTableViewCell
+            notificationsCell.textLabel!.text = "Notifications Distance"
+            notificationsCell.slider.value = 25
+            notificationsCell.slider.minimumValue = 0
+            notificationsCell.slider.maximumValue = 200
+            print(notificationsCell.slider.value)
+            return notificationsCell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 1: return "Account Settings"
-        default: return nil
-        }
     }
 
 }
