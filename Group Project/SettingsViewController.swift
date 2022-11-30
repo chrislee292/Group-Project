@@ -20,6 +20,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     let user = Auth.auth().currentUser
     let userEmail = Auth.auth().currentUser?.email
     //let credential = EmailAuthProvider.credential(withEmail: "email", password: "password")
+    var notifDistance = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         create_header()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool){
+        super.viewWillDisappear(true)
+        let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
+        let gpsVC = navVC.topViewController as! MapViewController
+        gpsVC.radNear = notifDistance
     }
     
     func create_header() {
@@ -78,7 +87,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             notificationsCell.slider.minimumValue = 0
             notificationsCell.slider.maximumValue = 200
             notificationsCell.slider.value = 25
-            print(notificationsCell.slider.value)
+            
+            notificationsCell.callback = { val in
+                self.notifDistance = Double(val)
+            }
+            //notifDistance = Double(notificationsCell.slider.value)
+            
+            print("settings \(notificationsCell.slider.value)")
             return notificationsCell
         case 1:
             let fontsCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)

@@ -44,7 +44,7 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
     let infoSegueIdentifier = "InfoSegueIdentifier"
     let textCellIdentifier = "TextCell"
     let headerTitles = [5, 4, 3, 2, 1]
-    let sectionImages:[UIImage?] = [UIImage(named: "starfive"), UIImage(named: "starfour"), UIImage(named: "starthree"), UIImage(named: "startwo"), UIImage(named: "starone")]
+    let sectionImages:[UIImage?] = [UIImage(named: "fiverank"), UIImage(named: "fourrank"), UIImage(named: "threerank"), UIImage(named: "tworank"), UIImage(named: "onerank")]
     
     //var sections: [[Cache]] = [[]]
     
@@ -143,7 +143,7 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
     }*/
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 80
+            return 40
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -157,8 +157,8 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
         return headerView
     }

@@ -31,6 +31,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var distTrav:Double = 0.0
     
     var notifBool = true
+    var radNear = 25.0
     
     let timerQueue = DispatchQueue(label: "timeQueue", qos: .background)
     
@@ -188,12 +189,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             var cacheCounter = 0
             var skipFirst = 0
             
-            let radNear:Double = 50.0
+            //let radNear:Double = 50.0
+            print(radNear)
             for point in anno{
                 if point.coordinate.latitude != localPos.coordinate.latitude && point.coordinate.longitude != localPos.coordinate.longitude{
                     //print("\(point.coordinate.latitude),\(point.coordinate.longitude)")
                     let distanceInMeters = localPos.distance(from: CLLocation(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude))
                     //print(distanceInMeters)
+                    //print(radNear)
                     if distanceInMeters <= radNear {
                         //print(distanceInMeters <= radNear)
                         cacheCounter += 1

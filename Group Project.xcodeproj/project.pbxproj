@@ -10,6 +10,7 @@
 		090659742926FAC9002F5828 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090659732926FAC9002F5828 /* SettingsViewController.swift */; };
 		354A48B52936C5E1002F1190 /* PastCacheTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A48B42936C5E1002F1190 /* PastCacheTableViewCell.swift */; };
 		354A48B72936D16D002F1190 /* PastCacheInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A48B62936D16D002F1190 /* PastCacheInfoViewController.swift */; };
+		354A48BB293730C5002F1190 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A48BA293730C5002F1190 /* TutorialViewController.swift */; };
 		356421C12921F361008F5ED6 /* CreateCacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C02921F361008F5ED6 /* CreateCacheViewController.swift */; };
 		356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356421C22921F379008F5ED6 /* CacheViewController.swift */; };
 		356DEF23292F3212004A90F2 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356DEF22292F3212004A90F2 /* ConfirmationViewController.swift */; };
@@ -40,6 +41,7 @@
 		090659732926FAC9002F5828 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		354A48B42936C5E1002F1190 /* PastCacheTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastCacheTableViewCell.swift; sourceTree = "<group>"; };
 		354A48B62936D16D002F1190 /* PastCacheInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastCacheInfoViewController.swift; sourceTree = "<group>"; };
+		354A48BA293730C5002F1190 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		356421C02921F361008F5ED6 /* CreateCacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCacheViewController.swift; sourceTree = "<group>"; };
 		356421C22921F379008F5ED6 /* CacheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheViewController.swift; sourceTree = "<group>"; };
 		356DEF22292F3212004A90F2 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				B40F10C6291F66F900C541AA /* Main.storyboard */,
+				354A48BA293730C5002F1190 /* TutorialViewController.swift */,
 				354A48B62936D16D002F1190 /* PastCacheInfoViewController.swift */,
 				35E7EC7E2935E133007A4147 /* PastCacheViewController.swift */,
 				354A48B42936C5E1002F1190 /* PastCacheTableViewCell.swift */,
@@ -217,6 +220,7 @@
 			files = (
 				B4995EFC292883F80036CFCC /* EditProfileViewController.swift in Sources */,
 				B4107D3129361DB600443732 /* NotificationsTableViewCell.swift in Sources */,
+				354A48BB293730C5002F1190 /* TutorialViewController.swift in Sources */,
 				B40F10C3291F66F200C541AA /* SignUpViewController.swift in Sources */,
 				35F1A0DC292E27C600E2C88F /* QRGenViewController.swift in Sources */,
 				35E7EC7F2935E133007A4147 /* PastCacheViewController.swift in Sources */,

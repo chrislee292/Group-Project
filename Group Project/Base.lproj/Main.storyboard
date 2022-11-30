@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QOM-6t-eIW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QOM-6t-eIW">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -269,6 +269,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="GPS" id="6DU-Ei-2ji" colorLabel="IBBuiltInLabel-Gray">
+                        <barButtonItem key="leftBarButtonItem" image="qrcode.viewfinder" catalog="system" id="yM9-9c-xzZ">
+                            <connections>
+                                <segue destination="dPI-hA-RDi" kind="show" id="qmd-zz-tWi"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="plus" catalog="system" id="9qo-Qv-Rhi">
                                 <connections>
@@ -900,7 +905,7 @@
         <!--Camera-->
         <scene sceneID="C0J-Wc-0yI">
             <objects>
-                <viewController id="dPI-hA-RDi" customClass="QRViewController" customModule="Group_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="dPI-hA-RDi" customClass="QRViewController" customModule="Group_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cts-1M-OQh">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -947,8 +952,8 @@
                         <segue destination="S4T-b9-G3l" kind="relationship" relationship="viewControllers" id="of5-2c-BPI"/>
                         <segue destination="hrX-6A-SDl" kind="relationship" relationship="viewControllers" id="24b-gO-GQF"/>
                         <segue destination="miZ-co-u1r" kind="relationship" relationship="viewControllers" id="oii-kt-VVN"/>
-                        <segue destination="dPI-hA-RDi" kind="relationship" relationship="viewControllers" id="fYD-iu-QwU"/>
                         <segue destination="vVu-2h-7nI" kind="relationship" relationship="viewControllers" id="7Fa-ot-OVO"/>
+                        <segue destination="vpi-4v-n8D" kind="relationship" relationship="viewControllers" id="1P7-s8-E2f"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOy-s8-7sE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -973,6 +978,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vue-MK-sok" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5500" y="3.5545023696682461"/>
+        </scene>
+        <!--Tutorial-->
+        <scene sceneID="TNC-WS-Ne0">
+            <objects>
+                <viewController id="vpi-4v-n8D" customClass="TutorialViewController" customModule="Group_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d7n-8k-lCm">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiJ-C7-bo3">
+                                <rect key="frame" x="0.0" y="47" width="374" height="223"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qFB-VS-JeH">
+                                <rect key="frame" x="0.0" y="358" width="390" height="403"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="SW8-fz-U9A"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Tutorial" image="questionmark.circle" catalog="system" id="XoI-aA-bdo"/>
+                    <connections>
+                        <outlet property="imageView" destination="qFB-VS-JeH" id="OHa-kV-slj"/>
+                        <outlet property="tutLabel" destination="OiJ-C7-bo3" id="OVx-Db-sK9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ezY-jG-oxK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2741.5384615384614" y="744.31279620853081"/>
         </scene>
         <!--Profile-->
         <scene sceneID="TNf-mN-h2E">
@@ -1031,6 +1069,7 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="qrcode" catalog="system" width="128" height="114"/>
         <image name="qrcode.viewfinder" catalog="system" width="128" height="115"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <image name="space2" width="1024" height="1024"/>
         <image name="trees" width="2372" height="950"/>
         <image name="trophy" catalog="system" width="128" height="128"/>
