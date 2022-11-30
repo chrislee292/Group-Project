@@ -78,9 +78,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         case 0:
             let notificationsCell = self.tableView.dequeueReusableCell(withIdentifier: "NotificationsCell", for: indexPath) as! NotificationsTableViewCell
             notificationsCell.textLabel!.text = "Notifications Distance"
-            notificationsCell.slider.value = 25
             notificationsCell.slider.minimumValue = 0
             notificationsCell.slider.maximumValue = 200
+            notificationsCell.slider.value = 25
             print(notificationsCell.slider.value)
             return notificationsCell
         default:
