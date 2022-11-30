@@ -70,7 +70,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,15 +83,36 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             notificationsCell.slider.value = 25
             print(notificationsCell.slider.value)
             return notificationsCell
+        case 1:
+            let fontsCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
+            fontsCell.textLabel!.text = "Fonts"
+            return fontsCell
+        case 2:
+            let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
+            resetTutorialCell.textLabel!.text = "Reset Tutorial"
+            return resetTutorialCell
+        case 3:
+            let resetPasswordCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
+            resetPasswordCell.textLabel!.text = "Reset Password"
+            return resetPasswordCell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
-            return cell
+            let errorCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
+            errorCell.textLabel!.text = "This shouldn't exist"
+            return errorCell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 65
+        } else {
+            return UITableView.automaticDimension
+        }
     }
 
 }
