@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 import Firebase
 import FirebaseAuth
 import FirebaseStorage
@@ -27,6 +28,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         // Do any additional setup after loading the view.
         create_header()
+        overrideUserInterfaceStyle = .dark
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +58,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.tableHeaderView = headerView
     }
     
+    func get_darkMode_bool() -> Bool {
+        let darkModeEnabled = NSEntityDescription.insertNewObject(forEntityName: "DarkMode", into: context)
+        
+        return darkModeEnabled.value(forKey: "darkModeEnabled")! as! Bool
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //if segue.identifier == "GPSSegueIdentifier",
             //... ADD SEGUE CODE
@@ -65,17 +73,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // or just send variable???
         //}
     }
-
-    @IBAction func segmentControlFont(_ sender: Any) {
-        
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,23 +99,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             print("settings \(notificationsCell.slider.value)")
             return notificationsCell
         case 1:
-            let fontsCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
-            fontsCell.textLabel!.text = "Fonts"
-            return fontsCell
+            let darkModeCell = tableView.dequeueReusableCell(withIdentifier: "DarkModeCell", for: indexPath) as! DarkModeTableViewCell
+            darkModeCell.textLabel!.text = "Dark Mode"
+            return darkModeCell
         case 2:
             let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
             resetTutorialCell.textLabel!.text = "Reset Tutorial"
             return resetTutorialCell
         case 3:
-            let resetPasswordCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
-            resetPasswordCell.textLabel!.text = "Reset Password"
-            return resetPasswordCell
-        case 4:
             let logOutCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
             logOutCell.label.text = "Log Out"
             logOutCell.label.textColor = .systemBlue
             return logOutCell
-        case 5:
+        case 4:
             let DeleteAccountCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
             DeleteAccountCell.label.text = "Delete Account"
             DeleteAccountCell.label.textColor = .red
@@ -127,27 +127,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.row {
+//        case 3:
+//            Auth.auth().sendPasswordReset(withEmail: self.userEmail!) { error in
+//                let controller = UIAlertController(
+//                    // Actually an Error
+//                    title: "Error",
+//                    message: "There was an error sending the password reset email.",
+//                    preferredStyle: .alert)
+//                controller.addAction(UIAlertAction(
+//                    title: "OK",
+//                    style: .default))
+//                self.present(controller, animated: true)
+//                print(self.userEmail!)
+//            }
         case 3:
-            Auth.auth().sendPasswordReset(withEmail: self.userEmail!) { error in
-                let controller = UIAlertController(
-                    // Actually an Error
-                    title: "Email Sent",
-                    message: "Your Email Has Been Sent!",
-                    preferredStyle: .alert)
-                controller.addAction(UIAlertAction(
-                    title: "OK",
-                    style: .default))
-                self.present(controller, animated: true)
-                print(self.userEmail!)
-            }
-        case 4:
             do {
                 try Auth.auth().signOut()
                 self.dismiss(animated: true)
             } catch {
                 print("Sign out error")
             }
-        case 5:
+        case 4:
             let controller = UIAlertController(
                 title: "Enter Current Password",
                 message: "Enter Your Current Password.",
@@ -226,8 +226,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
-        case 0, 4, 5:
+        case 0, 3, 4:
             return 65
+        case 1:
+            return 55
         default:
             return UITableView.automaticDimension
         }

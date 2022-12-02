@@ -35,6 +35,7 @@
 		B499A342291F3B3400FC2E5A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B499A341291F3B3400FC2E5A /* FirebaseFirestoreSwift */; };
 		B4AE0D1D29248EFD005791FF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */; };
 		B4D311B52937373A00129EF8 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D311B42937373A00129EF8 /* ButtonTableViewCell.swift */; };
+		B4F103722939F5620049E0F1 /* DarkModeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F103712939F5620049E0F1 /* DarkModeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		B499A33C291F398800FC2E5A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B4D311B42937373A00129EF8 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		B4F103712939F5620049E0F1 /* DarkModeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				356DEF22292F3212004A90F2 /* ConfirmationViewController.swift */,
 				B4995EFB292883F80036CFCC /* EditProfileViewController.swift */,
 				090659732926FAC9002F5828 /* SettingsViewController.swift */,
+				B4F103712939F5620049E0F1 /* DarkModeTableViewCell.swift */,
 				B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */,
 				356421C22921F379008F5ED6 /* CacheViewController.swift */,
 				B4107D3029361DB600443732 /* NotificationsTableViewCell.swift */,
@@ -226,6 +229,7 @@
 				35E7EC7F2935E133007A4147 /* PastCacheViewController.swift in Sources */,
 				B499A330291F370400FC2E5A /* Group_Project.xcdatamodeld in Sources */,
 				354A48B72936D16D002F1190 /* PastCacheInfoViewController.swift in Sources */,
+				B4F103722939F5620049E0F1 /* DarkModeTableViewCell.swift in Sources */,
 				B4D311B52937373A00129EF8 /* ButtonTableViewCell.swift in Sources */,
 				B499A326291F370400FC2E5A /* AppDelegate.swift in Sources */,
 				356421C32921F379008F5ED6 /* CacheViewController.swift in Sources */,
