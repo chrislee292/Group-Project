@@ -579,26 +579,6 @@
                                             <outlet property="label" destination="Cdj-cV-Cdg" id="g7a-P9-xox"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DarkModeCell" rowHeight="55" id="XdH-qv-Hde" customClass="DarkModeTableViewCell" customModule="Group_Project" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="224" width="358" height="55"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XdH-qv-Hde" id="lrN-K8-V3n" customClass="DarkModeTableViewCell" customModule="Group_Project" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="358" height="55"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="py7-Ek-RFD">
-                                                    <rect key="frame" x="256" y="12" width="49" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="switch:" destination="XdH-qv-Hde" eventType="valueChanged" id="Fgd-WA-hQ7"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="darkModeSwitch" destination="py7-Ek-RFD" id="LTw-xU-gEo"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>

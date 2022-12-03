@@ -28,7 +28,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         // Do any additional setup after loading the view.
         create_header()
-        overrideUserInterfaceStyle = .dark
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,12 +56,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.tableHeaderView = headerView
     }
-    
-    func get_darkMode_bool() -> Bool {
-        let darkModeEnabled = NSEntityDescription.insertNewObject(forEntityName: "DarkMode", into: context)
-        
-        return darkModeEnabled.value(forKey: "darkModeEnabled")! as! Bool
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //if segue.identifier == "GPSSegueIdentifier",
@@ -99,9 +93,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             print("settings \(notificationsCell.slider.value)")
             return notificationsCell
         case 1:
-            let darkModeCell = tableView.dequeueReusableCell(withIdentifier: "DarkModeCell", for: indexPath) as! DarkModeTableViewCell
-            darkModeCell.textLabel!.text = "Dark Mode"
-            return darkModeCell
+            let fontsCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
+            fontsCell.textLabel!.text = "Fonts"
+            return fontsCell
         case 2:
             let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
             resetTutorialCell.textLabel!.text = "Reset Tutorial"

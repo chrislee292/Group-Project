@@ -9,7 +9,4 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="DarkMode" representedClassName="DarkMode" syncable="YES" codeGenerationType="class">
-        <attribute name="darkModeEnabled" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-    </entity>
 </model>
