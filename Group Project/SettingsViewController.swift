@@ -21,6 +21,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     let user = Auth.auth().currentUser
     let userEmail = Auth.auth().currentUser?.email
     var notifDistance = 0.0
+    //let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
+    //let gpsVC = navVC.topViewController as! MapViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +40,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillDisappear(_ animated: Bool){
         super.viewWillDisappear(true)
+        /*
         let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
         let gpsVC = navVC.topViewController as! MapViewController
-        gpsVC.radNear = notifDistance
+        gpsVC.radNear = notifDistance*/
     }
     
     func create_header() {
@@ -85,8 +88,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             notificationsCell.slider.maximumValue = 200
             notificationsCell.slider.value = 25
             
+            let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
+            let gpsVC = navVC.topViewController as! MapViewController
+            
             notificationsCell.callback = { val in
-                self.notifDistance = Double(val)
+                //self.notifDistance = Double(val)
+
+                gpsVC.radNear = Double(val)
             }
             //notifDistance = Double(notificationsCell.slider.value)
             
@@ -94,7 +102,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return notificationsCell
         case 1:
             let fontsCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
-            fontsCell.textLabel!.text = "Fonts"
+            fontsCell.textLabel!.text = "Dark Mode"
             return fontsCell
         case 2:
             let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)

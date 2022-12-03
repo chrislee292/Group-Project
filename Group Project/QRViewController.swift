@@ -12,6 +12,7 @@ import CoreData
 
 class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
+    // variables to start and present the QR camera
     var capture = AVCaptureSession()
     var vid = AVCaptureVideoPreviewLayer()
     var qrcodeinview: UIView?
@@ -48,6 +49,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                 let input = try AVCaptureDeviceInput(device: capDev)
                 capture.addInput(input)
                 
+                // get the output of the QR code
                 let captureMetaDataOutput = AVCaptureMetadataOutput()
                 capture.addOutput(captureMetaDataOutput)
                 
@@ -91,11 +93,13 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        // get the result of the QR code
         if metadataObjects.count == 0{
             qrcodeinview?.frame = CGRect.zero
             result = "No QR code found"
             return
         }
+        // make it into a string
         let obj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
         if obj.type == AVMetadataObject.ObjectType.qr {
             let bcobj = vid.transformedMetadataObject(for: obj)
@@ -106,46 +110,54 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
             }
         }
         
+        // split the result into the user email and title of the cache
         var resultArr = result.components(separatedBy: "-")
-        
         var user = resultArr[0]
         var title = resultArr[1]
+        
+        // set variables to grab from the database
         var finds = 0
         var arrayFound:[String] = []
         
+        // grab the user information from the database
         let db = Firestore.firestore()
         let docRef = db.collection("userInfo").document(userEmail!)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let data = document.data()
                 let amountOfFinds = data!["amountOfFinds"]! as? Int ?? 0
-                // add this to userdata
+                // get the amountOfFinds they currently have and the caches they have found
                 arrayFound = (data!["foundCaches"]! as? [String])!
                 finds = amountOfFinds
             }
             
+            // if the cache they scanned is not themselves and they have not found the cache before
             if user != self.userEmail! && self.result != "No QR code found" && arrayFound.contains("cache_\(title)") == false
             {
-                print(finds)
+                // append the cache to the found caches
                 arrayFound.append("cache_\(title)")
+                
+                // update the user's info adding to found caches and number of finds
                 db.collection("userInfo").document(self.userEmail!).updateData([ "amountOfFinds": finds+1 ])
                 db.collection("userInfo").document(self.userEmail!).updateData([ "foundCaches": arrayFound ])
                 
+                // send alert that they have found a cache
                 let controller = UIAlertController(
                     title: "Cache Scanned!",
                     message: "You Have Found a Cache!",
                     preferredStyle: .alert)
-                
                 controller.addAction(UIAlertAction(
                     title: "OK",
                     style: .default,
                     handler: {
                         (action) in
+                        // pop back to map view controller
                         self.navigationController?.popViewController(animated: true)
                         let docRefCache = db.collection("caches").document("cache_\(title)")
                         // grabs whats in the document of the specific annotation
                         docRefCache.getDocument { (document, error) in
                             if let document = document, document.exists {
+                                // grab the data of the current cache
                                 let data = document.data()
                                 let cDifficulty = data!["difficulty"]! as? String ?? ""
                                 let cHazards = data!["hazards"]! as? String ?? ""
@@ -154,6 +166,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                                 let cEmail = data!["email"]! as? String ?? ""
                                 let cLat = data!["latitude"]! as? Double ?? 0.0
                                 let cLong = data!["longitude"]! as? Double ?? 0.0
+                                // store the information of the found cache into the coredata
                                 self.storeCache(cDiff: Int(cDifficulty)!, cEmail: cEmail, cHazard: cHazards, cHints: cHints, cLatitude: cLat, cLongitude: cLong, cTitle: cTitle)
                             }
                         }
@@ -161,6 +174,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                 
                 self.present(controller, animated: true)
             }
+            // if they already found this cache, send an alert
             else if user != self.userEmail! && arrayFound.contains("cache_\(title)") == true{
                 let controller = UIAlertController(
                     title: "Invalid Cache",
@@ -173,6 +187,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                 
                 self.present(controller, animated: true)
             }
+            // if they own this cache
             else{
                 let controller = UIAlertController(
                     title: "Invalid Cache",
@@ -187,13 +202,13 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
             }
         }
     }
-    // protocol method to create a pizza
+    // protocol method to create a cache
     func storeCache(cDiff: Int, cEmail:String, cHazard:String, cHints: String, cLatitude: Double, cLongitude: Double, cTitle: String){
         
-        // add a pizza to the core data
+        // add a cache to the core data
         let cache = NSEntityDescription.insertNewObject(forEntityName: "CacheData", into: context)
         
-        // set the values of the pizza in the core data
+        // set the values of the cache in the core data
         cache.setValue(cDiff, forKey: "difficulty")
         cache.setValue(cEmail, forKey: "email")
         cache.setValue(cHazard, forKey: "hazards")
