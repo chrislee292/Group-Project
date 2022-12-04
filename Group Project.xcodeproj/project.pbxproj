@@ -36,6 +36,7 @@
 		B4AE0D1D29248EFD005791FF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */; };
 		B4D311B52937373A00129EF8 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D311B42937373A00129EF8 /* ButtonTableViewCell.swift */; };
 		B4FF1724293C98BE00007C15 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FF1723293C98BE00007C15 /* ResetPasswordViewController.swift */; };
+		B4FF1732293CAC7B00007C15 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FF1731293CAC7B00007C15 /* SwitchTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B4D311B42937373A00129EF8 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		B4FF1723293C98BE00007C15 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		B4FF1731293CAC7B00007C15 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				B40F10C0291F66F200C541AA /* MapViewController.swift */,
 				B40F10BC291F66F200C541AA /* QRViewController.swift */,
 				B40F10BE291F66F200C541AA /* SignUpViewController.swift */,
+				B4FF1731293CAC7B00007C15 /* SwitchTableViewCell.swift */,
 				B40F10BF291F66F200C541AA /* ViewController.swift */,
 				B499A325291F370400FC2E5A /* AppDelegate.swift */,
 				B499A327291F370400FC2E5A /* SceneDelegate.swift */,
@@ -241,6 +244,7 @@
 				B40F10C2291F66F200C541AA /* LoginViewController.swift in Sources */,
 				356421C12921F361008F5ED6 /* CreateCacheViewController.swift in Sources */,
 				B40F10C1291F66F200C541AA /* QRViewController.swift in Sources */,
+				B4FF1732293CAC7B00007C15 /* SwitchTableViewCell.swift in Sources */,
 				B40F10C5291F66F200C541AA /* MapViewController.swift in Sources */,
 				090659742926FAC9002F5828 /* SettingsViewController.swift in Sources */,
 			);

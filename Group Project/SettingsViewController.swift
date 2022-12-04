@@ -102,9 +102,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             print("settings \(notificationsCell.slider.value)")
             return notificationsCell
         case 1:
-            let fontsCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
-            fontsCell.textLabel!.text = "Dark Mode"
-            return fontsCell
+            let switchCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchTableViewCell
+            switchCell.textLabel!.text = "Enable Notifications"
+            return switchCell
         case 2:
             let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
             resetTutorialCell.textLabel!.text = "Reset Tutorial"
@@ -239,6 +239,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         switch indexPath.row {
         case 0, 3, 4:
             return 65
+        case 1:
+            return 55
         default:
             return UITableView.automaticDimension
         }
