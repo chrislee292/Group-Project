@@ -75,8 +75,8 @@ class TutorialViewController: UIViewController {
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let data = document.data()
-                let tutorial = data!["resetTut"]! as? Bool ?? nil
-                tutPath = tutorial!
+                let tutorial = data!["resetTut"]! as? Bool ?? false
+                tutPath = tutorial
             }
             /*
             if logPath == false{
