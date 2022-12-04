@@ -37,6 +37,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 //self.storeUser(login: false)
                 //self.performSegue(withIdentifier: self.segueIdentifier, sender: nil)
                 self.emailField.text = nil
+                self.usernameField.text = nil
+                self.firstNameField.text = nil
+                self.lastNameField.text = nil
                 self.passwordField.text = nil
             }
         }

@@ -106,10 +106,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             fontsCell.textLabel!.text = "Dark Mode"
             return fontsCell
         case 2:
-            let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
-            resetTutorialCell.label.text = "Reset Tutorial"
-            resetTutorialCell.label.textColor = .systemBlue
-            //resetTutorialCell.textLabel!.text = "Reset Tutorial"
+            let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
+            resetTutorialCell.textLabel!.text = "Reset Tutorial"
             return resetTutorialCell
         case 3:
             let logOutCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
@@ -149,6 +147,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             let db = Firestore.firestore()
             let docRef = db.collection("userInfo").document(userEmail!)
             docRef.updateData(["resetTut": true])
+            let controller = UIAlertController(
+                title: "Tutorial Reset",
+                message: "The next time you log in, you should see the tutorial again!",
+                preferredStyle: .alert)
+            controller.addAction(UIAlertAction(
+                title: "OK",
+                style: .default))
+            self.present(controller, animated: true)
         case 3:
             do {
                 login = false
@@ -156,7 +162,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 try Auth.auth().signOut()
                 self.dismiss(animated: true)
             } catch {
-                print("Sign out error")
+                let controller = UIAlertController(
+                    title: "Error",
+                    message: "There was an error logging out. Please contact support.",
+                    preferredStyle: .alert)
+                controller.addAction(UIAlertAction(
+                    title: "OK",
+                    style: .default))
+                self.present(controller, animated: true)
             }
         case 4:
             let controller = UIAlertController(
@@ -239,8 +252,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         switch indexPath.row {
         case 0, 3, 4:
             return 65
-        case 1:
-            return 55
         default:
             return UITableView.automaticDimension
         }
