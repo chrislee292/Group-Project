@@ -130,19 +130,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.row {
-//        case 3:
-//            Auth.auth().sendPasswordReset(withEmail: self.userEmail!) { error in
-//                let controller = UIAlertController(
-//                    // Actually an Error
-//                    title: "Error",
-//                    message: "There was an error sending the password reset email.",
-//                    preferredStyle: .alert)
-//                controller.addAction(UIAlertAction(
-//                    title: "OK",
-//                    style: .default))
-//                self.present(controller, animated: true)
-//                print(self.userEmail!)
-//            }
         case 2:
             let db = Firestore.firestore()
             let docRef = db.collection("userInfo").document(userEmail!)

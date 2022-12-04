@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
-    let segueIdentifier = "LoginToNavControl"
+    let loginSegue = "LoginToNavControl"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             auth, user in
             if user != nil {
                 login = true
-                self.performSegue(withIdentifier: self.segueIdentifier, sender: nil)
+                self.performSegue(withIdentifier: self.loginSegue, sender: nil)
                 self.emailField.text = nil
                 self.passwordField.text = nil
             }

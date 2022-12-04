@@ -35,6 +35,7 @@
 		B499A342291F3B3400FC2E5A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B499A341291F3B3400FC2E5A /* FirebaseFirestoreSwift */; };
 		B4AE0D1D29248EFD005791FF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */; };
 		B4D311B52937373A00129EF8 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D311B42937373A00129EF8 /* ButtonTableViewCell.swift */; };
+		B4FF1724293C98BE00007C15 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FF1723293C98BE00007C15 /* ResetPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		B499A33C291F398800FC2E5A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B4AE0D1C29248EFD005791FF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B4D311B42937373A00129EF8 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		B4FF1723293C98BE00007C15 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				B40F10C6291F66F900C541AA /* Main.storyboard */,
+				B4FF1723293C98BE00007C15 /* ResetPasswordViewController.swift */,
 				354A48BA293730C5002F1190 /* TutorialViewController.swift */,
 				354A48B62936D16D002F1190 /* PastCacheInfoViewController.swift */,
 				35E7EC7E2935E133007A4147 /* PastCacheViewController.swift */,
@@ -221,6 +224,7 @@
 				B4995EFC292883F80036CFCC /* EditProfileViewController.swift in Sources */,
 				B4107D3129361DB600443732 /* NotificationsTableViewCell.swift in Sources */,
 				354A48BB293730C5002F1190 /* TutorialViewController.swift in Sources */,
+				B4FF1724293C98BE00007C15 /* ResetPasswordViewController.swift in Sources */,
 				B40F10C3291F66F200C541AA /* SignUpViewController.swift in Sources */,
 				35F1A0DC292E27C600E2C88F /* QRGenViewController.swift in Sources */,
 				35E7EC7F2935E133007A4147 /* PastCacheViewController.swift in Sources */,
