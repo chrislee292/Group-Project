@@ -6,8 +6,21 @@
 //
 
 import UIKit
+import Firebase
+import CoreData
+
+class User{
+    var loginVar:Bool
+    
+    init(loginVar: Bool) {
+        self.loginVar = loginVar
+    }
+}
 
 class TutorialViewController: UIViewController {
+    
+    let userEmail = Auth.auth().currentUser?.email
+    //var userArray:[User] = []
     
     // arrays for presets that appear on the VC - images and captions that appear
     var imageArray = [UIImage(named: "firsttut"), UIImage(named: "secondtutorial"), UIImage(named: "newqr"), UIImage(named: "newpast"), UIImage(named: "firsttut-2")]
@@ -26,6 +39,8 @@ class TutorialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //fillData()
+        
         // set the times pressed to 0
         numPressed = 0
         
@@ -38,6 +53,45 @@ class TutorialViewController: UIViewController {
         // set the image and text to the first component
         imageView.image = imageArray[0]
         tutLabel.text = wordsArray[0]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        print("tutorial")
+        
+        let logPath = login
+        //print("\(logPath) tutorial")
+        
+        if logPath == false{
+            //docRef.updateData(["logout": false])
+            self.navigationController?.popToRootViewController(animated: false)
+        }
+        
+        var tutPath = false
+        
+        let db = Firestore.firestore()
+        let docRef = db.collection("userInfo").document(userEmail!)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                let tutorial = data!["resetTut"]! as? Bool ?? nil
+                tutPath = tutorial!
+            }
+            /*
+            if logPath == false{
+                //docRef.updateData(["logout": false])
+                self.navigationController?.popToRootViewController(animated: false)
+            }*/
+            
+            print(tutPath)
+            if tutPath == false{
+                self.performSegue(withIdentifier: self.segueIdentifier, sender: nil)
+            }
+            else if tutPath == true && logPath == true{
+                docRef.updateData(["resetTut": false])
+            }
+        }
     }
     
     // when the screen is tapped
@@ -75,7 +129,27 @@ class TutorialViewController: UIViewController {
         
         // if the number of times pressed goes past the array value, start over
         if numPressed >= 5{
+            performSegue(withIdentifier: segueIdentifier, sender: nil)
             numPressed = 0
         }
     }
+    /*
+    func fillData(){
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserData")
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            // fetch the caches as an array
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // if an error occurs display it
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        for user in fetchedResults!{
+            userArray.append(User(loginVar: ((user.value(forKey: "logout")) != nil)))
+        }
+    }*/
 }

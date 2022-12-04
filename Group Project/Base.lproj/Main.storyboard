@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QOM-6t-eIW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QOM-6t-eIW">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -93,7 +93,7 @@
                     <connections>
                         <outlet property="emailField" destination="M0f-f7-YOG" id="qlk-71-7MQ"/>
                         <outlet property="passwordField" destination="jwj-zL-KId" id="AbR-B0-WHI"/>
-                        <segue destination="8zB-fY-ltm" kind="presentation" identifier="LoginToNavControl" modalPresentationStyle="fullScreen" id="SSM-it-cBS"/>
+                        <segue destination="vpi-4v-n8D" kind="show" identifier="LoginToNavControl" id="k2K-QX-kB8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1SI-If-dbU" sceneMemberID="firstResponder"/>
@@ -102,7 +102,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </objects>
-            <point key="canvasLocation" x="1876.9230769230769" y="36.96682464454976"/>
+            <point key="canvasLocation" x="1625" y="37"/>
         </scene>
         <!--Create Cache-->
         <scene sceneID="enR-ez-d9n">
@@ -833,12 +833,12 @@
                         <outlet property="lastNameField" destination="ouH-Lh-1jq" id="ZVb-c3-gkv"/>
                         <outlet property="passwordField" destination="UYm-aC-Lad" id="JiS-ig-yB5"/>
                         <outlet property="usernameField" destination="7kb-ED-w82" id="G5P-9b-la3"/>
-                        <segue destination="8zB-fY-ltm" kind="presentation" identifier="SignUpToNavControl" modalPresentationStyle="fullScreen" id="UTR-tn-ctf"/>
+                        <segue destination="vpi-4v-n8D" kind="show" identifier="SignUpToNavControl" id="VEF-re-LeJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wt4-Lc-J2M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2808" y="-185"/>
+            <point key="canvasLocation" x="2342" y="-400"/>
         </scene>
         <!--Cache View Controller-->
         <scene sceneID="cVf-2K-m4e">
@@ -944,7 +944,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vr4-Ca-Iem" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="947.69230769230762" y="36.96682464454976"/>
+            <point key="canvasLocation" x="808" y="37"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="X5T-yc-sIg">
@@ -1011,14 +1011,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tutorial" image="questionmark.circle" catalog="system" id="XoI-aA-bdo"/>
+                    <navigationItem key="navigationItem" id="7uT-nd-7Q2"/>
                     <connections>
                         <outlet property="imageView" destination="qFB-VS-JeH" id="OHa-kV-slj"/>
                         <outlet property="tutLabel" destination="OiJ-C7-bo3" id="OVx-Db-sK9"/>
+                        <segue destination="8zB-fY-ltm" kind="presentation" identifier="TabVCSegueIdentifier" modalPresentationStyle="fullScreen" id="k6s-lE-asw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezY-jG-oxK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2741.5384615384614" y="744.31279620853081"/>
+            <point key="canvasLocation" x="3312" y="4"/>
         </scene>
         <!--Profile-->
         <scene sceneID="TNf-mN-h2E">
@@ -1060,7 +1062,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UTR-tn-ctf"/>
+        <segue reference="VEF-re-LeJ"/>
         <segue reference="R6r-Ys-1eo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="linkColor"/>

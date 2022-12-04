@@ -13,19 +13,24 @@ import FirebaseStorage
 
 let textCellIdentifier = "TextCell"
 
+var login = true
+
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var userArray:[User] = []
     
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
     let userEmail = Auth.auth().currentUser?.email
     var notifDistance = 0.0
-    //let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
-    //let gpsVC = navVC.topViewController as! MapViewController
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //fillData()
+        
         tableView.delegate = self
         tableView.dataSource = self
         // Do any additional setup after loading the view.
@@ -40,10 +45,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillDisappear(_ animated: Bool){
         super.viewWillDisappear(true)
-        /*
-        let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
-        let gpsVC = navVC.topViewController as! MapViewController
-        gpsVC.radNear = notifDistance*/
     }
     
     func create_header() {
@@ -105,8 +106,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             fontsCell.textLabel!.text = "Dark Mode"
             return fontsCell
         case 2:
-            let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
-            resetTutorialCell.textLabel!.text = "Reset Tutorial"
+            let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
+            resetTutorialCell.label.text = "Reset Tutorial"
+            resetTutorialCell.label.textColor = .systemBlue
+            //resetTutorialCell.textLabel!.text = "Reset Tutorial"
             return resetTutorialCell
         case 3:
             let logOutCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
@@ -142,8 +145,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 //                self.present(controller, animated: true)
 //                print(self.userEmail!)
 //            }
+        case 2:
+            let db = Firestore.firestore()
+            let docRef = db.collection("userInfo").document(userEmail!)
+            docRef.updateData(["resetTut": true])
         case 3:
             do {
+                login = false
+                //print("\(login) settings")
                 try Auth.auth().signOut()
                 self.dismiss(animated: true)
             } catch {
@@ -236,5 +245,38 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return UITableView.automaticDimension
         }
     }
-
+    /*
+    func fillData(){
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserData")
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            // fetch the caches as an array
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // if an error occurs display it
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        for user in fetchedResults!{
+            userArray.append(User(loginVar: ((user.value(forKey: "logout")) != nil)))
+        }
+    }
+    
+    // save the core data changes
+    func saveContext () {
+        // check for changes
+        if context.hasChanges {
+            do {
+                // save
+                try context.save()
+            } catch {
+                // error
+                let nserror = error as NSError
+                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }*/
 }

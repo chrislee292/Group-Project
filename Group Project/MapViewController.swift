@@ -229,7 +229,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             // time to wait for notification
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false)
-            print("here")
             
             // create a request for a notification
             let request = UNNotificationRequest(identifier: "myNotification", content: content, trigger: trigger)

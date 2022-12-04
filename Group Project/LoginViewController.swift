@@ -26,6 +26,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().addStateDidChangeListener() {
             auth, user in
             if user != nil {
+                login = true
                 self.performSegue(withIdentifier: self.segueIdentifier, sender: nil)
                 self.emailField.text = nil
                 self.passwordField.text = nil
@@ -42,10 +43,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     alert.addAction(okAction)
                     self.present(alert, animated: true)
                 } else {
-                    let alert = UIAlertController(title: "Test", message: "There was an Unknown Error. Contact Support for Help.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Test login", message: "There was an Unknown Error. Contact Support for Help.", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "OK", style:.default)
                     alert.addAction(okAction)
-                    self.present(alert, animated: true)
+                    //self.present(alert, animated: true)
                 }
             }
     }
