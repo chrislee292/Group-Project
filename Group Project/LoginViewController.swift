@@ -34,6 +34,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     @IBAction func signInButtonPressed(_ sender: Any) {
         Auth.auth().signIn(withEmail: emailField.text!, password: passwordField.text!) {
                 authResult, error in
@@ -46,7 +51,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     let alert = UIAlertController(title: "Test login", message: "There was an Unknown Error. Contact Support for Help.", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "OK", style:.default)
                     alert.addAction(okAction)
-                    //self.present(alert, animated: true)
                 }
             }
     }
