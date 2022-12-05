@@ -27,7 +27,7 @@ class NotificationsTableViewCell: UITableViewCell {
         let v = slider.value
         
         // change the slider text
-        sliderLabel.text! = "\(Int(slider.value))"
+        sliderLabel.text! = "\(Int(slider.value)) m"
         
         // send the value to the settings tableview
         callback?(v)

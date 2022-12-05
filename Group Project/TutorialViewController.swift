@@ -14,8 +14,8 @@ class TutorialViewController: UIViewController {
     let userEmail = Auth.auth().currentUser?.email
     
     // arrays for presets that appear on the VC - images and captions that appear
-    var imageArray = [UIImage(named: "firsttut"), UIImage(named: "secondtutorial"), UIImage(named: "newqr"), UIImage(named: "newpast"), UIImage(named: "firsttut-2")]
-    var wordsArray = ["Look for Cache Pins!", "Click on the Cache Pin to check its details!", "Once Found, scan it using the QR code Scanner!", "Check your past accomplishments using the Past Caches", "Add your own caches and join the fun!"]
+    var imageArray = [UIImage(named: "firsttut"), UIImage(named: "secondtutorial"), UIImage(named: "newqr"), UIImage(named: "newpast"), UIImage(named: "firsttut-2"), UIImage(named: "create1"), UIImage(named: "create2"), UIImage(named: "create3")]
+    var wordsArray = ["Look for Cache Pins!", "Click on the Cache Pin to check its details!", "Once Found, scan it using the QR code Scanner!", "Check your past accomplishments using the Past Caches", "Add your own caches and join the fun!", "To create a cache: fill out the information for your cache", "Click the button to get your QR code", "Scan it using the QR scanner at the top of the Creation Screen!"]
     
     // variable for how many times the screen is pressed
     var numPressed = 0
@@ -111,7 +111,7 @@ class TutorialViewController: UIViewController {
         numPressed += 1
         
         // if the number of times pressed goes past the array value, start over
-        if numPressed >= 5{
+        if numPressed >= 8{
             performSegue(withIdentifier: segueIdentifier, sender: nil)
             numPressed = 0
         }

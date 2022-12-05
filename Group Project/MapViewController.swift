@@ -190,6 +190,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // notification method
     func tellDistance(notif: Bool) {
+        print(radNear)
         // check if notifications are allowed
         if notif == true{
             // get an array of all annotations

@@ -79,7 +79,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             notificationsCell.slider.minimumValue = 0
             notificationsCell.slider.maximumValue = 200
             notificationsCell.slider.value = Float(notifDistance)
-            notificationsCell.sliderLabel.text! = "\(Int(notifDistance))"
+            notificationsCell.sliderLabel.text! = "\(Int(notifDistance)) m"
             
             // get the GPS VC as a controller
             let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
