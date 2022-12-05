@@ -23,7 +23,14 @@ class SwitchTableViewCell: UITableViewCell {
     }
     
     @IBAction func `switch`(_ sender: UISwitch) {
-        
+        let mapvc = MapViewController()
+        if(!(cellSwitch.isOn)){
+            mapvc.notifBool = false
+        }
+        else{
+            mapvc.notifBool = true
+            
+        }
     }
 
 }
