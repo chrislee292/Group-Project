@@ -126,9 +126,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    
+    //tutorial and reset functionality
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        //tutorial reset
         switch indexPath.row {
         case 2:
             let db = Firestore.firestore()
@@ -142,6 +145,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 title: "OK",
                 style: .default))
             self.present(controller, animated: true)
+        //logging out error try catch
         case 3:
             do {
                 login = false
@@ -158,6 +162,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     style: .default))
                 self.present(controller, animated: true)
             }
+        //reset password and error creation
         case 4:
             let controller = UIAlertController(
                 title: "Enter Current Password",
@@ -234,6 +239,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return
         }
     }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {

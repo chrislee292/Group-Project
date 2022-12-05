@@ -35,7 +35,7 @@ class PastCacheInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // update all the labels with their correspoinding quality
+        // update all the labels with their corresponding quality
         titleLabel.text = titleInfo
         diffLabel.text = "Difficulty: \(String(diffInfo))"
         
