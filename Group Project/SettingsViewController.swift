@@ -89,21 +89,29 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             notificationsCell.slider.maximumValue = 200
             notificationsCell.slider.value = 25
             
+            // get the GPS VC as a controller
             let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
             let gpsVC = navVC.topViewController as! MapViewController
             
+            //
             notificationsCell.callback = { val in
-                //self.notifDistance = Double(val)
-
                 gpsVC.radNear = Double(val)
             }
-            //notifDistance = Double(notificationsCell.slider.value)
-            
-            print("settings \(notificationsCell.slider.value)")
             return notificationsCell
         case 1:
             let switchCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchTableViewCell
             switchCell.textLabel!.text = "Enable Notifications"
+            switchCell.cellSwitch.setOn(true, animated: false)
+            
+            // get the GPS VC as a controller
+            let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
+            let gpsVC = navVC.topViewController as! MapViewController
+            
+            // get the value from the table VC
+            switchCell.callback = { val in
+                gpsVC.notifBool = Bool(val)
+            }
+            
             return switchCell
         case 2:
             let resetTutorialCell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
@@ -149,7 +157,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         case 3:
             do {
                 login = false
-                //print("\(login) settings")
+                print("\(login) settings")
                 try Auth.auth().signOut()
                 self.dismiss(animated: true)
             } catch {

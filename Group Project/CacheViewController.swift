@@ -26,6 +26,8 @@ class CacheViewController: UIViewController {
     var creator:String = ""
     var titleName:String = ""
     
+    var dismissHandler: (() -> Void)!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +49,13 @@ class CacheViewController: UIViewController {
             } else {
                 print("Document does not exist")
             }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isBeingDismissed {
+            self.dismissHandler()
         }
     }
     
@@ -78,6 +87,7 @@ class CacheViewController: UIViewController {
                             print("Document successfully removed!")
                         }
                     }
+                    self.dismiss(animated: true, completion: nil)
                 }))
             present(controller, animated: true)
         }else{

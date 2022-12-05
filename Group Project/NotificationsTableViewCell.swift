@@ -23,10 +23,13 @@ class NotificationsTableViewCell: UITableViewCell {
     }
     
     @IBAction func changeSliderLabel(sender: UISlider!) {
+        // get the slider value
         let v = slider.value
         
+        // change the slider text
         sliderLabel.text! = "\(Int(slider.value))"
         
+        // send the value to the settings tableview
         callback?(v)
     }
 

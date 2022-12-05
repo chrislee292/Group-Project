@@ -39,10 +39,10 @@ class PastCacheInfoViewController: UIViewController {
         titleLabel.text = titleInfo
         diffLabel.text = "Difficulty: \(String(diffInfo))"
         
-        hintLabel.text = hintInfo
-        hazardLabel.text = hazardInfo
+        hintLabel.text = "Hint: \(hintInfo)"
+        hazardLabel.text = "Hazard: \(hazardInfo)"
         
-        latitudeLabel.text = String(format: "%.4f", latInfo)
-        longitudeLabel.text = String(format: "%.4f", longInfo)
+        latitudeLabel.text = String(format: "Latitude: %.4f", latInfo)
+        longitudeLabel.text = String(format: "Longitude: %.4f", longInfo)
     }
 }

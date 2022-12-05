@@ -28,8 +28,6 @@ class QRGenViewController: UIViewController {
         
         // generate the QR code
         qrImage = generateQRCode(from: codeString)
-                
-        //print(qrImage!)
         
         // set the image to be the qrcode
         qrImageView.image = qrImage

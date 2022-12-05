@@ -71,12 +71,6 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
         // fill the array with the caches on core data
         fillData()
         
-        //let cDiffs = coordArray.map { $0.cacheDifficulty}
-        /*sections = headerTitles.map { cDiffs in
-            return coordArray
-                .filter { $0.cacheDifficulty == cDiffs } // only names with the same first letter in title
-        }*/
-        
         // reload the table
         self.tableView.reloadData()
     }
@@ -128,21 +122,6 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    //REMOVE
-    // add swipe to delete
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // remove from the item from the data source
-            coordArray.remove(at: indexPath.row)
-            
-            // delete the cache from the core data at that spot
-            deleteData(row: indexPath.row)
-            
-            // remove the row
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return coordArray.count
     }
@@ -170,8 +149,8 @@ class PastCacheViewController: UIViewController, UITableViewDelegate, UITableVie
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
 
         return headerView
     }

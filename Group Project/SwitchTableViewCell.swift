@@ -11,6 +11,8 @@ class SwitchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellSwitch: UISwitch!
 
+    var callback: ((Bool) -> ())?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,14 +25,14 @@ class SwitchTableViewCell: UITableViewCell {
     }
     
     @IBAction func `switch`(_ sender: UISwitch) {
-        let mapvc = MapViewController()
-        if(!(cellSwitch.isOn)){
-            mapvc.notifBool = false
+        // get the value of the switch
+        var switchBool = true
+        if(sender.isOn){
+            switchBool = true
         }
         else{
-            mapvc.notifBool = true
-            
+            switchBool = false
         }
+        callback?(switchBool)
     }
-
 }

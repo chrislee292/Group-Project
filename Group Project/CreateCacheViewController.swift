@@ -45,10 +45,6 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate, UI
         }
     }
     
-    // start a location manager
-    /*var locationManager: CLLocationManager = CLLocationManager()
-    var startLocation: CLLocation!*/
-    
     // get an instance of database
     let db = Firestore.firestore()
     
@@ -59,16 +55,6 @@ class CreateCacheViewController: UIViewController, CLLocationManagerDelegate, UI
         titleLabel.delegate = self
         hazardLabel.delegate = self
         hintLabel.delegate = self
-        
-        /*
-        locationManager.delegate = self
-        
-        // get the current location
-        startLocation = nil
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest       // Use the "best accuracy" setting
-        locationManager.requestWhenInUseAuthorization()                 // Ask user for permission to use location
-        locationManager.startUpdatingLocation()*/
-        
     }
     
     @IBAction func cacheButtonPressed(_ sender: Any) {

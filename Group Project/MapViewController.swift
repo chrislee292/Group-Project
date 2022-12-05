@@ -34,6 +34,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // variables to hold the notification variable
     var notifBool = true
     var radNear = 25.0
+    var tempBool = true
     
     // create a background queue
     let timerQueue = DispatchQueue(label: "timeQueue", qos: .background)
@@ -69,18 +70,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsUserLocation = true
         mapView.showAnnotations(mapView.annotations, animated: true)
         
-        // if notifications are allowed
-        if notifBool == true{
-            // start an async background queue to run every amount of time
-            timerQueue.async {
-                while self.notifBool == true{
-                    //sleep(300)
-                    sleep(5)
-                    
-                    // send an order to the main queue to send a notification
-                    DispatchQueue.main.async {
-                        self.tellDistance(notif: self.notifBool)
-                    }
+        // create an async to scan for notifications
+        timerQueue.async {
+            while self.tempBool == true{
+                //sleep(300)
+                sleep(5)
+                
+                // send an order to the main queue to send a notification
+                DispatchQueue.main.async {
+                    self.tellDistance(notif: self.notifBool)
                 }
             }
         }
@@ -89,8 +87,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        
+        resetMap()
+        
+        /*
         // wipe the annotations from the mapview
         mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
         
         // pull the cache documents from the database
         let cacheRef = db.collection("caches")
@@ -118,7 +122,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     self.mapView.addOverlay(circle)
                 }
             }
-        }
+        }*/
     }
     
     // annotation function
@@ -176,6 +180,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             // send the title of the cache selected to the cache VC
             nextCacheVC.titleName = String((sender as! MKAnnotationView).annotation!.title!!)
+            nextCacheVC.dismissHandler = {
+                self.resetMap()
+            }
         }
     }
     
@@ -190,9 +197,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // make the variables equivalent to the current position
         localPos = CLLocation(latitude: lat, longitude: long)
         templocalPos = userLocation.coordinate
-        
-        //let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
-        //mapView.setRegion(region, animated: true)
     }
     
     // notification method
@@ -241,5 +245,39 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // button to segue to the create cache VC
     @IBAction func addPoint(_ sender: Any) {
         performSegue(withIdentifier: "createCacheSegueIdentifier", sender: view)
+    }
+    
+    func resetMap(){
+        // wipe the annotations from the mapview
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
+        
+        // pull the cache documents from the database
+        let cacheRef = db.collection("caches")
+        cacheRef.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting document: \(err)")
+            } else {
+                // for each cache grab data
+                for document in querySnapshot!.documents{
+                    
+                    // get the latitude, longitude, and title of the cache
+                    let data = document.data()
+                    let lati = data["latitude"]! as? Double ?? 0
+                    let longi = data["longitude"]! as? Double ?? 0
+                    let pinTitle = data["title"]! as? String ?? "nil"
+                    
+                    // create the annotation and add it to the map
+                    let pinMarker = MKPointAnnotation()
+                    pinMarker.title = pinTitle
+                    pinMarker.coordinate = CLLocationCoordinate2D(latitude: lati, longitude: longi)
+                    self.mapView.addAnnotation(pinMarker)
+                    
+                    // add a 25 meter circle around the cache annotation
+                    let circle = MKCircle(center: CLLocationCoordinate2D(latitude: lati, longitude: longi), radius: 25)
+                    self.mapView.addOverlay(circle)
+                }
+            }
+        }
     }
 }

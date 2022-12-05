@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 
-class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var newUsernameField: UITextField!
     @IBOutlet weak var newFirstName: UITextField!
@@ -25,6 +25,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        newUsernameField.delegate = self
+        newFirstName.delegate = self
+        newLastName.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +80,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 "lastName": self.newLastName.text!
             ])
         }
-        
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
     }
     
     @IBAction func libraryButtonPressed(_ sender: Any) {
@@ -183,5 +188,17 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 }
             }
         }
+    }
+    // Called when 'return' key pressed
+
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Called when the user clicks on the view outside of the UITextField
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
