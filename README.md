@@ -72,15 +72,15 @@ At least one of the following per team members:
 
 
 
-1. Local notifications (Done via Cache Notification)
+1. Local notifications (Done via Notifications on Settings + Caches by Chris)
 2. Core Graphics
 3. Gesture Recognition
-4. Animation (Done via Tutorial)
+4. Animation (Done via Tutorial by Justin)
 5. Calendar
 6. Core Motion
-7. Core Location/ Mapkit (Done via MapView on Home Screen)
+7. Core Location/ Mapkit (Done via MapView on Home Screen by Justin)
 8. Core Audio
-9. QR Code (Done Via QR ViewControllers)
+9. QR Code (Done Via QR ViewControllers by Brian)
 
 Work Distribution Table
 
