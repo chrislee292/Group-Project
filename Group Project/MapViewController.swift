@@ -25,6 +25,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let locationManager = CLLocationManager()
     
     // create an instance of a database
+    let userEmail = Auth.auth().currentUser?.email
     let db = Firestore.firestore()
     
     // establish a local position variable
@@ -70,9 +71,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsUserLocation = true
         mapView.showAnnotations(mapView.annotations, animated: true)
         
+        // get the default settings for the user
+        let docRef = db.collection("userInfo").document(userEmail!)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                let distance = data!["notifDistance"]! as? Double ?? 0.0
+                let allowNotif = data!["notifSwitch"]! as? Bool ?? true
+                self.radNear = distance
+                self.notifBool = allowNotif
+                print(self.radNear)
+            } else {
+                print("Document does not exist")
+            }
+        }
+        
+        print(radNear)
         // create an async to scan for notifications
         timerQueue.async {
-            while self.tempBool == true{
+            while self.tempBool == true && login == true{
                 //sleep(300)
                 sleep(5)
                 
@@ -87,42 +104,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // send the current distance for notifications and whether to send notifications or not
+        let settingVC = tabBarController?.viewControllers?[2] as! SettingsViewController
+        settingVC.notifDistance = radNear
+        settingVC.nBool = notifBool
+        
         navigationController?.setNavigationBarHidden(false, animated: animated)
         
         resetMap()
-        
-        /*
-        // wipe the annotations from the mapview
-        mapView.removeAnnotations(mapView.annotations)
-        mapView.removeOverlays(mapView.overlays)
-        
-        // pull the cache documents from the database
-        let cacheRef = db.collection("caches")
-        cacheRef.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting document: \(err)")
-            } else {
-                // for each cache grab data
-                for document in querySnapshot!.documents{
-                    
-                    // get the latitude, longitude, and title of the cache
-                    let data = document.data()
-                    let lati = data["latitude"]! as? Double ?? 0
-                    let longi = data["longitude"]! as? Double ?? 0
-                    let pinTitle = data["title"]! as? String ?? "nil"
-                    
-                    // create the annotation and add it to the map
-                    let pinMarker = MKPointAnnotation()
-                    pinMarker.title = pinTitle
-                    pinMarker.coordinate = CLLocationCoordinate2D(latitude: lati, longitude: longi)
-                    self.mapView.addAnnotation(pinMarker)
-                    
-                    // add a 20 meter circle around the cache annotation
-                    let circle = MKCircle(center: CLLocationCoordinate2D(latitude: lati, longitude: longi), radius: 20)
-                    self.mapView.addOverlay(circle)
-                }
-            }
-        }*/
     }
     
     // annotation function
@@ -201,7 +190,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // notification method
     func tellDistance(notif: Bool) {
-        
         // check if notifications are allowed
         if notif == true{
             // get an array of all annotations
@@ -214,8 +202,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             for point in anno{
                 // check if the point is not the current icon point
                 if point.coordinate.latitude != localPos.coordinate.latitude && point.coordinate.longitude != localPos.coordinate.longitude{
+                    
                     // find the distance
                     let distanceInMeters = localPos.distance(from: CLLocation(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude))
+                    
                     // compare the distance to the setting of chosen distance for notifications
                     if distanceInMeters <= radNear {
                         // if the cache is within radNear

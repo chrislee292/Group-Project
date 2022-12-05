@@ -24,15 +24,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
     let userEmail = Auth.auth().currentUser?.email
-    var notifDistance = 0.0
+    var notifDistance = 25.0
+    var nBool = true
+    
+    var tempDistance = 0.0
+    var tempBool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //fillData()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
         // Do any additional setup after loading the view.
         create_header()
     }
@@ -40,11 +39,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         create_header()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     
-    override func viewWillDisappear(_ animated: Bool){
-        super.viewWillDisappear(true)
+    override func viewDidDisappear(_ animated: Bool){
+        super.viewDidDisappear(true)
     }
     
     func create_header() {
@@ -87,29 +89,59 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             notificationsCell.textLabel!.text = "Notifications Distance"
             notificationsCell.slider.minimumValue = 0
             notificationsCell.slider.maximumValue = 200
-            notificationsCell.slider.value = 25
+            notificationsCell.slider.value = Float(notifDistance)
+            notificationsCell.sliderLabel.text! = "\(Int(notifDistance))"
             
             // get the GPS VC as a controller
             let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
             let gpsVC = navVC.topViewController as! MapViewController
             
-            //
+            var change = false
+            
+            // check for changes
             notificationsCell.callback = { val in
                 gpsVC.radNear = Double(val)
+                self.tempDistance = Double(val)
+                change = true
+                
+                // if no changes set the distance to be the same past distance
+                if change == false{
+                    self.tempDistance = self.notifDistance
+                }
+                
+                // store in firebase
+                let db = Firestore.firestore()
+                let docRef = db.collection("userInfo").document(self.userEmail!)
+                docRef.updateData(["notifDistance": self.tempDistance])
             }
+            
             return notificationsCell
         case 1:
             let switchCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchTableViewCell
             switchCell.textLabel!.text = "Enable Notifications"
-            switchCell.cellSwitch.setOn(true, animated: false)
+            switchCell.cellSwitch.setOn(nBool, animated: false)
             
             // get the GPS VC as a controller
             let navVC = tabBarController?.viewControllers?[0] as! UINavigationController
             let gpsVC = navVC.topViewController as! MapViewController
             
+            var change = false
+            
             // get the value from the table VC
             switchCell.callback = { val in
                 gpsVC.notifBool = Bool(val)
+                self.tempBool = Bool(val)
+                change = true
+                
+                // check if there are any changes
+                if change == false{
+                    self.tempBool = self.nBool
+                }
+                
+                // store in firebase
+                let db = Firestore.firestore()
+                let docRef = db.collection("userInfo").document(self.userEmail!)
+                docRef.updateData(["notifSwitch": self.tempBool])
             }
             
             return switchCell
@@ -133,7 +165,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return errorCell
         }
     }
-    
     
     //tutorial and reset functionality
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -223,6 +254,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                 }
                                 
                                 do {
+                                    login = false
                                     try Auth.auth().signOut()
                                     self.dismiss(animated: true)
                                 } catch {

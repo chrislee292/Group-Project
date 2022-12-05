@@ -39,8 +39,6 @@ class ProfileViewController: UIViewController {
 
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
                 let data = document.data()
                 let firstName = data!["firstName"]! as? String ?? ""
                 let lastName = data!["lastName"]! as? String ?? ""

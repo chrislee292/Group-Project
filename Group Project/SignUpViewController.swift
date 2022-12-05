@@ -74,7 +74,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 "amountOfFinds": 0,
                 "profilePhotoLink": "",
                 "foundCaches":[],
-                "resetTut": true
+                "resetTut": true,
+                "notifDistance": 25.0,
+                "notifSwitch": true
                 //"login":true
             ]) { err in
             if let err = err {
@@ -103,33 +105,4 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    /*
-    // protocol method to create a User
-    func storeUser(login:Bool){
-        
-        // add a cache to the core data
-        let user = NSEntityDescription.insertNewObject(forEntityName: "UserData", into: context)
-        
-        // set the values of the cache in the core data
-        user.setValue(login, forKey: "logout")
-        
-        // commit the changes
-        saveContext()
-    }
-    
-    // save the core data changes
-    func saveContext () {
-        // check for changes
-        if context.hasChanges {
-            do {
-                // save
-                try context.save()
-            } catch {
-                // error
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }*/
 }
