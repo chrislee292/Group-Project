@@ -1,31 +1,6 @@
 # Group-Project
 CS 329 Bulko Group Project w/ Christopher Lee, Jayashree Ganesan, Brian Herron, Justin Vu
 
-<!-- Output copied to clipboard! -->
-
-<!-----
-
-Yay, no errors, warnings, or alerts!
-
-Conversion time: 0.749 seconds.
-
-
-Using this Markdown file:
-
-1. Paste this output into your source file.
-2. See the notes and action items below regarding this conversion run.
-3. Check the rendered output (headings, lists, code blocks, tables) for proper
-   formatting and use a linkchecker before you publish this page.
-
-Conversion notes:
-
-* Docs to Markdown version 1.0β33
-* Mon Dec 05 2022 00:30:34 GMT-0800 (PST)
-* Source doc: READ_ME Geocatcher
-* Tables are currently converted to HTML tables.
------>
-
-
 **Name of Project**: Geocatcher
 
 **Team Members**: Brian Herron, Christopher Lee, Justin Vu, Jayashree Ganesan
@@ -48,19 +23,19 @@ Conversion notes:
 
 
 
-1. Login/register path with Firebase
-2. “Settings” screen and the three behaviors implemented are:
-    1. Notifications Distance
-    2. Enable Notifications
-    3. Reset Tutorial
-3. Non-default fonts and colors used
+1. Login/register path with Firebase (Done)
+2. “Settings” screen and the three behaviors implemented are: (Done)
+    1. Notifications Distance (Done)
+    2. Enable Notifications (Done)
+    3. Reset Tutorial (Done)
+3. Non-default fonts and colors used (Done)
 
 Two major elements used:
 
 
 
-1. Core Data
-2. User Profile path using camera and photo library
+1. Core Data (Done for Past Caches)
+2. User Profile path using camera and photo library (Done)
 3. Multithreading
 4. SwiftUI
 
@@ -76,7 +51,7 @@ One of the following:
 
 1. Table View (on Settings)
 2. Collection View
-3. Tab VC
+3. Tab VC (On Home Screen / MapViewController)
 4. Page VC
 
          
@@ -86,8 +61,8 @@ Two of the following:
 
 
 
-1. Alerts
-2. Popovers
+1. Alerts (Done)
+2. Popovers (Done)
 3. Stack Views
 4. Scroll Views
 5. Haptics
@@ -97,15 +72,15 @@ At least one of the following per team members:
 
 
 
-1. Local notifications
+1. Local notifications (Done via Cache Notification)
 2. Core Graphics
 3. Gesture Recognition
-4. Animation
+4. Animation (Done via Tutorial)
 5. Calendar
 6. Core Motion
-7. Core Location/ Mapkit
+7. Core Location/ Mapkit (Done via MapView on Home Screen)
 8. Core Audio
-9. QR Code
+9. QR Code (Done Via QR ViewControllers)
 
 Work Distribution Table
 
