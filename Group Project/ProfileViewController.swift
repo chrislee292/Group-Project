@@ -36,7 +36,8 @@ class ProfileViewController: UIViewController {
         let docRef = db.collection("userInfo").document(userEmail!)
         let storage = Storage.storage()
         var profilePhotoReference: StorageReference!
-
+        
+        // Set user profile labels to whatever is corresponding in document
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let data = document.data()
@@ -62,7 +63,8 @@ class ProfileViewController: UIViewController {
                 print("Document does not exist")
             }
         }
-    
+        
+        // Set profile photo from document profile photo link
         Firestore.firestore().collection("userInfo").document(userEmail!).getDocument { snapshot, error in
             if error != nil {
                 print ("Error")

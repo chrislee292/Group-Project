@@ -18,6 +18,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var newLastName: UITextField!
     @IBOutlet weak var profilePhoto: UIImageView!
     
+    // Access current user email and firestore db
     let userEmail = Auth.auth().currentUser?.email
     let picker = UIImagePickerController()
     let db = Firestore.firestore()
@@ -35,6 +36,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let storage = Storage.storage()
         var profilePhotoReference: StorageReference!
         
+        // Access current user's document and pull needed link to display profile image
         Firestore.firestore().collection("userInfo").document(userEmail!).getDocument { snapshot, error in
             if error != nil {
                 print ("Error")
@@ -60,6 +62,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func SaveButton(_ sender: Any) {
+        
+        // Upon hitting "save", all attributes in Firestore document will be updated
         let db = Firestore.firestore()
         let docRef = db.collection("userInfo").document(self.userEmail!)
         
@@ -85,11 +89,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
+    // Access photo library
     @IBAction func libraryButtonPressed(_ sender: Any) {
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
         present(picker, animated: true)
     }
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let storage = Storage.storage()
@@ -98,6 +104,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let chosenImage = info[.originalImage] as! UIImage
         uploadUserImage(withImage: chosenImage, fileName: "profilePhoto")
         
+        // Assuming there isn't an error, set the profile photo to whatever link is stored in Firestore Document
         Firestore.firestore().collection("userInfo").document(userEmail!).getDocument { snapshot, error in
             if error != nil {
                 print ("Error")
@@ -128,8 +135,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         dismiss(animated: true)
     }
     
+    
     @IBAction func cameraButtonSelected(_ sender: Any) {
         
+        // Check if we have a front camera
         if UIImagePickerController.availableCaptureModes(for: .front) != nil {
             // we have a front camera
             switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -145,6 +154,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 return
             }
             
+            // Return photo taken from camera
             picker.allowsEditing = false
             picker.sourceType = .camera
             picker.cameraCaptureMode = .photo
@@ -164,6 +174,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func uploadUserImage(withImage: UIImage, fileName: String) {
         let docRef = db.collection("userInfo").document(userEmail!)
         
+        // Update document in Firestore with profile photo link
         guard let imageData = withImage.jpegData(compressionQuality: 0.5) else { return }
         let storageRef = Storage.storage().reference()
         let thisUserPhotoStorageRef = storageRef.child(userEmail!).child(fileName)

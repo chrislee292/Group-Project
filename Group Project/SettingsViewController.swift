@@ -32,7 +32,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         create_header()
     }
     
@@ -50,6 +49,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func create_header() {
+        // Create a custom header that says, "Settings" because of a lack of navigation bar
         let headerView: UIView = UIView.init(frame: CGRect(x: self.view.frame.minX, y: self.view.frame.minY, width: self.view.frame.width, height: 40))
         headerView.center.x = self.view.center.x
 
@@ -61,17 +61,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         headerView.addSubview(label)
         
         self.tableView.tableHeaderView = headerView
-    }
-
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //if segue.identifier == "GPSSegueIdentifier",
-            //... ADD SEGUE CODE
-            //let nextCacheVC = segue.destination as? MapViewController{
-                //nextCacheVC.notifBool = notifTog
-            //add delegate to send notification to GPS screen
-            // or just send variable???
-        //}
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -225,6 +214,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         let enteredText = textFields[0].text
                         let credential: AuthCredential = EmailAuthProvider.credential(withEmail: self.userEmail!, password: enteredText!)
                         
+                        // If user could be authenticated, then delete account document
                         self.user!.reauthenticate(with: credential) { (result, error) in
                             if (error == nil) {
                                 self.db.collection("userInfo").document(self.userEmail!).delete() { error in
@@ -240,6 +230,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                     }
                                 }
                                 
+                                // deleete account for FirebaseAuth
                                 self.user?.delete { error in
                                     if let error = error {
                                         let controller = UIAlertController(
@@ -253,6 +244,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                     }
                                 }
                                 
+                                // Sign Out
                                 do {
                                     login = false
                                     try Auth.auth().signOut()
@@ -262,6 +254,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                 }
                                 
                             } else {
+                                // Alert user of an error
+                                
                                 let controller = UIAlertController(
                                     title: "Wrong Password",
                                     message: "You entered the wrong password. Please try again.",
@@ -283,6 +277,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
+        // Return different heights for rows depending on the cell
         case 0, 3, 4:
             return 65
         case 1:
@@ -291,38 +286,4 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return UITableView.automaticDimension
         }
     }
-    /*
-    func fillData(){
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserData")
-        var fetchedResults:[NSManagedObject]? = nil
-        
-        do {
-            // fetch the caches as an array
-            try fetchedResults = context.fetch(request) as? [NSManagedObject]
-        } catch {
-            // if an error occurs display it
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-        
-        for user in fetchedResults!{
-            userArray.append(User(loginVar: ((user.value(forKey: "logout")) != nil)))
-        }
-    }
-    
-    // save the core data changes
-    func saveContext () {
-        // check for changes
-        if context.hasChanges {
-            do {
-                // save
-                try context.save()
-            } catch {
-                // error
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }*/
 }

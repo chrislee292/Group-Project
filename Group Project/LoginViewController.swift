@@ -23,6 +23,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         passwordField.isSecureTextEntry = true
         
+        // Create listener to actually sign in once "user" status is nill
         Auth.auth().addStateDidChangeListener() {
             auth, user in
             if user != nil {
@@ -40,6 +41,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signInButtonPressed(_ sender: Any) {
+        // Actually perform sign in, with alert saying there was an error otherwise
         Auth.auth().signIn(withEmail: emailField.text!, password: passwordField.text!) {
                 authResult, error in
                 if let error = error as NSError? {
@@ -48,7 +50,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     alert.addAction(okAction)
                     self.present(alert, animated: true)
                 } else {
-                    let alert = UIAlertController(title: "Test login", message: "There was an Unknown Error. Contact Support for Help.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Unknown Error", message: "There was an Unknown Error. Please contact Christopher Lee at christopherdlee2567@utexas.edu for support.", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "OK", style:.default)
                     alert.addAction(okAction)
                 }

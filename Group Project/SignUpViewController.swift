@@ -47,7 +47,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
         
+        // If all fields are NOT empty
         if (!emailField.text!.isEmpty) && (!usernameField.text!.isEmpty) && (!firstNameField.text!.isEmpty) && (!lastNameField.text!.isEmpty) && (!passwordField.text!.isEmpty) {
+            
+            // Create a user in FirebaseAuth
             Auth.auth().createUser(withEmail: emailField.text!.lowercased(), password: passwordField.text!) {
                 authResult, error in
                 if let error = error as NSError? {
@@ -65,6 +68,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             
             login = true
             
+            // Also create said user's corresponding document
             let db = Firestore.firestore()
             db.collection("userInfo").document(emailField.text!.lowercased()).setData([
                 "username": usernameField.text!,
@@ -86,6 +90,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         } else {
+            // Generate an alert if fields are not filled out
             let alert = UIAlertController(title: "Missing Fields", message: "Please ensure ALL fields are filled out.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style:.default)
             alert.addAction(okAction)

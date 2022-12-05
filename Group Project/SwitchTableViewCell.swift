@@ -25,7 +25,7 @@ class SwitchTableViewCell: UITableViewCell {
     }
     
     @IBAction func `switch`(_ sender: UISwitch) {
-        // get the value of the switch
+        // get the value of the switch for notifications
         var switchBool = true
         if(sender.isOn){
             switchBool = true
