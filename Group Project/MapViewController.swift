@@ -85,8 +85,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 print("Document does not exist")
             }
         }
-        
-        print(radNear)
+    
         // create an async to scan for notifications
         timerQueue.async {
             while self.tempBool == true && login == true{
@@ -190,7 +189,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // notification method
     func tellDistance(notif: Bool) {
-        print(radNear)
         // check if notifications are allowed
         if notif == true{
             // get an array of all annotations
